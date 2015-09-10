@@ -3,8 +3,16 @@
 angular.module('siciliaNormannaApp')
   .controller('NavbarCtrl', function ($scope) {
     $scope.menu = [{
-      'title': 'Home',
-      'state': 'main'
+        'title': 'Home',
+        'state': 'main'
+    },
+    {
+        'title': 'Monasteries',
+        'state': 'monasteries'
+    },
+    {
+        'title': 'Fortifications',
+        'state':'fortifications'
     }];
 
     $scope.isCollapsed = true;
