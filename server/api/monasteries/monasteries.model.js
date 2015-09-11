@@ -4,9 +4,8 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 
 var MonasteriesSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  siteName: String,
+  modernProvince: String,
 });
 
 module.exports = mongoose.model('Monasteries', MonasteriesSchema);

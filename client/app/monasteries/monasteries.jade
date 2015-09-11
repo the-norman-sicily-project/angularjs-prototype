@@ -1,1 +1,16 @@
-div This is the monasteries view.
+navbar
+
+header#banner.hero-unit
+    .container
+        h1 Monasteries
+
+.container
+    .row
+        .col-lg-12
+            h1.page-header Known Monasteries:
+            ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='monastery in monasteries')
+                li
+                    a(href='#/api/monasteries/{{monastery._id}}', tooltip='{{monastery.modernProvince}}')
+                        | {{monastery.siteName}}
+
+footer
