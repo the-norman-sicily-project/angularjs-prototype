@@ -13,7 +13,12 @@ angular.module('siciliaNormannaApp')
     {
         'title': 'Fortifications',
         'state':'fortifications'
-    }];
+    },
+    {
+        'title': 'Sites',
+        'state': 'sites'
+    }
+    ];
 
     $scope.isCollapsed = true;
   });
