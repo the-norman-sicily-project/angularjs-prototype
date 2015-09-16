@@ -17,7 +17,7 @@ angular.module('siciliaNormannaApp')
     {
         'title': 'Sites',
         'state': 'sites'
-    }
+    },
     ];
 
     $scope.isCollapsed = true;

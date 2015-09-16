@@ -8,11 +8,11 @@ header#banner.hero-unit
     .row
         .col-lg-12
             h1.page-header Known Sites:
-            div(ng-repeat="(siteType, sites) in siteTypes")
+            div(ng-repeat='(siteType, sites) in siteTypes')
                 h2 {{siteType}}
-                ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat="site in sites")
+                ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='site in sites')
                     li
-                        a(href='#/api/sites/{{site._id}}', tooltip='{{site.modernProvince}}')
+                        a(ui-sref='.detail({id: site._id})', tooltip='{{site.modernProvince}}')
                             | {{site.siteName}}
 
 footer
