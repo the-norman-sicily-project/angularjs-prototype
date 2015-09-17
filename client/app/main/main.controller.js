@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-  .controller('MainCtrl', function($scope, $http) {
+  .controller('MainController', function($scope, $http) {
     $scope.awesomeThings = [];
 
     $http.get('/api/things').then(function(response) {

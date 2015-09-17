@@ -5,6 +5,6 @@ angular.module('siciliaNormannaApp')
     return {
       templateUrl: 'components/navbar/navbar.html',
       restrict: 'E',
-      controller: 'NavbarCtrl'
+      controller: 'NavbarController'
     };
   });

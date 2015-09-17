@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-  .controller('NavbarCtrl', function ($scope) {
+  .controller('NavbarController', function ($scope) {
     $scope.menu = [{
         'title': 'Home',
         'state': 'main'
