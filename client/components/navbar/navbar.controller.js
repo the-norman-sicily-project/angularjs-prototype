@@ -8,7 +8,7 @@ angular.module('siciliaNormannaApp')
     },
     {
         'title': 'Sites',
-        'state': 'sites'
+        'state': 'sites.list'
     },
     ];
 
