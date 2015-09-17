@@ -15,14 +15,14 @@ angular.module('siciliaNormannaApp')
             }
         },
         onEnter: function() {
-            console.log("enter sites");
+            console.log('enter sites');
         }
       })
       .state('sites.list', {
         url: '',
         templateUrl: 'app/sites/sites-list.html',
         onEnter: function() {
-            console.log("enter sites list");
+            console.log('enter sites list');
         }
       })
       .state('sites.detail', {
@@ -36,7 +36,7 @@ angular.module('siciliaNormannaApp')
             }
         },
         onEnter: function(){
-            console.log("enter sites detail");
+            console.log('enter sites detail');
         }
         });
     });

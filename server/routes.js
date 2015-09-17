@@ -10,8 +10,6 @@ var path = require('path');
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/fortifications', require('./api/fortifications'));
-  app.use('/api/monasteries', require('./api/monasteries'));
   app.use('/api/sites', require('./api/site'));
   app.use('/api/things', require('./api/thing'));
   // All undefined asset or api routes should return a 404
