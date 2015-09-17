@@ -7,14 +7,6 @@ angular.module('siciliaNormannaApp')
         'state': 'main'
     },
     {
-        'title': 'Monasteries',
-        'state': 'monasteries'
-    },
-    {
-        'title': 'Fortifications',
-        'state':'fortifications'
-    },
-    {
         'title': 'Sites',
         'state': 'sites'
     },
