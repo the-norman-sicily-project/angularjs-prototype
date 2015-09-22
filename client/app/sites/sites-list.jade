@@ -6,6 +6,6 @@
                 h2 {{siteType}}
                 ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='site in sites')
                     li
-                        a(ui-sref='sites.detail({id: site._id})', tooltip='{{site.modernProvince}}')
-                            | {{site.siteName}}
+                        a(ui-sref='sites.detail({id: site._id})', tooltip='{{site.location.modernProvince}}')
+                            | {{site.name.en}}
 
