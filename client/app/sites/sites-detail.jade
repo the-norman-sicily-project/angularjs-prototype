@@ -2,6 +2,14 @@
     .row
         .col-lg-12
             h1.page-header {{site.name.en}}
-                h2 {{site.type}}
-                    h3 {{site.location.modernProvince}}
+            p A {{site.type}} located in {{site.location.modernProvince}}
+
+
+                site-location(location='site.location')
+
+                table
+                    tr(ng-repeat='(key, value) in site.details')
+                        td {{key}}
+                        td {{value}}
+
 

@@ -13,8 +13,8 @@ var SiteSchema = new Schema({
       latitude: Number,
       isExact: Boolean,
       modernProvince: String,
-      approximate:String,
-      elevation:Number
+      approximate: String,
+      elevation: Number
   },
   type: String
 });
