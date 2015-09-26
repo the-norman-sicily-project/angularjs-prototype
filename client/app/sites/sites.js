@@ -27,8 +27,15 @@ angular.module('siciliaNormannaApp')
       })
       .state('sites.detail', {
         url: '/:id',
-        templateUrl: 'app/sites/sites-detail.html',
-        controller: 'SiteController',
+        views: {
+            '': {
+                templateUrl: '/app/sites/sites-detail.html',
+                controller: 'SiteController'
+            },
+            'location@sites.detail': {
+                templateUrl: '/app/sites/sites-location.html'
+            }
+        },
         resolve: {
             siteData: function(SiteService, $stateParams) {
                 var SiteData = SiteService.get({id: $stateParams.id});

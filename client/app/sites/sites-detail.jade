@@ -2,14 +2,23 @@
     .row
         .col-lg-12
             h1.page-header {{site.name.en}}
-            p A {{site.type}} located in {{site.location.modernProvince}}
+            div(ng-show='site.primarySourceQuotation')
+                em site.primarySourceQuotation
 
+            p A {{site.type}} located in {{site.location.modernProvince}}. There are{{site.extantRemains ? ' ': ' no '}}remains on the site.
 
-                site-location(location='site.location')
+            div(ng-show='site.datesVisited')
+                p We visited the site on #[span(ng-repeat='dateVisited in site.datesVisited') {{dateVisited}}{{$last ? '' : ($index==sites.datesVisited.length-2) ? ' and ' : ', '}}]
 
-                table
-                    tr(ng-repeat='(key, value) in site.details')
-                        td {{key}}
-                        td {{value}}
+            div(ng-show='site.notes')
+                p {{site.notes}}
+
+            <div ui-view="location"></div>
+
+            h2 Site Details
+            table
+                tr(ng-repeat='(key, value) in site.details')
+                    td {{key}}
+                    td {{value}}
 
 
