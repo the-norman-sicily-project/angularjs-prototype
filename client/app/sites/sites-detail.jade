@@ -1,24 +1,52 @@
 .container
     .row
-        .col-lg-12
-            h1.page-header {{site.name.en}}
-            div(ng-show='site.primarySourceQuotation')
-                em site.primarySourceQuotation
+        .col-lg-7
+            .row
+                .col-lg-12
+                    p.site-detail-title {{site.name.en}}
+                    p.site-detail-location {{site.location.approximate}}, {{site.location.modernProvince}}
+                    div(ng-show='site.datesVisited') #[p.site-detail-date #[span(ng-repeat='dateVisited in site.datesVisited') {{dateVisited | asDate | date : 'MMM yyyy' }}{{$last ? '' : ($index==sites.datesVisited.length-2) ? ' and ' : ', '}}]]
+            .row
+                .col-lg-12
+                    div [IMAGE PLACEHOLDER]
+        .col-lg-5.gutter-border
+            .row
+                div.col-lg-6
+                    div.site-detail-label Status:
+                div.col-lg-6
+                    div.site-detail-data {{site.details.classificationAtFoundation}}
+            .row
+                div.col-lg-6
+                    div.site-detail-label Gender:
+                div.col-lg-6
+                    div.site-detail-data {{site.details.inhabitants.sex}}
+            .row
+                div.col-lg-6
+                    div.site-detail-label Earliest Surviving Record:
+                div.col-lg-6
+                    div.site-detail-data {{site.details.earliestSurvivingRecord}}
+            .row
+                div.col-lg-6
+                    div.site-detail-label Subject of Dedication:
+                div.col-lg-6
+                    div.site-detail-data {{site.details.subjectOfTheDedication}}
 
-            p A {{site.type}} located in {{site.location.modernProvince}}. There are{{site.extantRemains ? ' ': ' no '}}remains on the site.
+    
+div(ng-show='site.primarySourceQuotation')
+em site.primarySourceQuotation
+p A {{site.type}} located in {{site.location.modernProvince}}. There are{{site.extantRemains ? ' ': ' no '}}remains on the site.
 
-            div(ng-show='site.datesVisited')
-                p We visited the site on #[span(ng-repeat='dateVisited in site.datesVisited') {{dateVisited}}{{$last ? '' : ($index==sites.datesVisited.length-2) ? ' and ' : ', '}}]
+div(ng-show='site.datesVisited')
+    p We visited the site on #[span(ng-repeat='dateVisited in site.datesVisited') {{dateVisited}}{{$last ? '' : ($index==sites.datesVisited.length-2) ? ' and ' : ', '}}]
 
-            div(ng-show='site.notes')
-                p {{site.notes}}
+div(ng-show='site.notes')
+    p {{site.notes}}
 
-            <div ui-view="location"></div>
+<div ui-view="location"></div>
 
-            h2 Site Details
-            table
-                tr(ng-repeat='(key, value) in site.details')
-                    td {{key}}
-                    td {{value}}
-
+h2 Site Details
+    table
+        tr(ng-repeat='(key, value) in site.details')
+            td {{key}}
+            td {{value}}
 
