@@ -10,43 +10,54 @@
                 .col-lg-12
                     div [IMAGE PLACEHOLDER]
         .col-lg-5.gutter-border
-            .row
+            .row(ng-show='site.details.classificationAtFoundation')
                 div.col-lg-6
                     div.site-detail-label Status:
                 div.col-lg-6
                     div.site-detail-data {{site.details.classificationAtFoundation}}
-            .row
+            .row(ng-show='site.details.inhabitants.sex')
                 div.col-lg-6
                     div.site-detail-label Gender:
                 div.col-lg-6
                     div.site-detail-data {{site.details.inhabitants.sex}}
-            .row
+            .row(ng-show='site.details.earliestSurvivingRecord')
                 div.col-lg-6
                     div.site-detail-label Earliest Surviving Record:
                 div.col-lg-6
                     div.site-detail-data {{site.details.earliestSurvivingRecord}}
-            .row
+            .row(ng-show='site.details.subjectOfTheDedication')
                 div.col-lg-6
                     div.site-detail-label Subject of Dedication:
                 div.col-lg-6
                     div.site-detail-data {{site.details.subjectOfTheDedication}}
-
-    
-div(ng-show='site.primarySourceQuotation')
-em site.primarySourceQuotation
-p A {{site.type}} located in {{site.location.modernProvince}}. There are{{site.extantRemains ? ' ': ' no '}}remains on the site.
-
-div(ng-show='site.datesVisited')
-    p We visited the site on #[span(ng-repeat='dateVisited in site.datesVisited') {{dateVisited}}{{$last ? '' : ($index==sites.datesVisited.length-2) ? ' and ' : ', '}}]
-
-div(ng-show='site.notes')
-    p {{site.notes}}
-
-<div ui-view="location"></div>
-
-h2 Site Details
-    table
-        tr(ng-repeat='(key, value) in site.details')
-            td {{key}}
-            td {{value}}
+            .row(ng-show='site.details.order')
+                div.col-lg-6
+                    div.site-detail-label Monastic Order:
+                div.col-lg-6
+                    div.site-detail-data {{site.details.order}}
+            .row(ng-show='site.details.founder.name')
+                div.col-lg-6
+                    div.site-detail-label Founder:
+                div.col-lg-6
+                    div.site-detail-data {{site.details.founder.socialPosition === null ? '' : site.details.founder.socialPosition + ' ' }}{{site.details.founder.name}}
+            .row(ng-show='site.extantRemains')
+                div.col-lg-6
+                    div.site-detail-label Extant Remains:
+                div.col-lg-6
+                    div.site-detail-data {{site.extantRemains ? 'Yes' : 'No'}}
+            .row(ng-show='site.details.motherHouseTo.length > 0')
+                div.col-lg-6
+                    div.site-detail-label Mother House To:
+                div.col-lg-6
+                    div.site-detail-data  #[span(ng-repeat='subjectHouse in site.motherHouseTo') {{subjectHouse}}{{$last ? '' : ($index==sites.motherHouseTo.length-2) ? ' and ' : ', '}}]
+            .row(ng-show='site.details.subjectOf')
+                div.col-lg-6
+                    div.site-detail-label Subject Of:
+                div.col-lg-6
+                    div.site-detail-data {{site.details.subjectOf}}
+            .row(ng-show='site.name.variations.length > 0')
+                div.col-lg-6
+                    div.site-detail-label Known Spelling Variations:
+                div.col-lg-6
+                    div.site-detail-data  #[span(ng-repeat='variation in site.name.variations') {{variation}}{{$last ? '' : ($index==sites.name.variations.length-2) ? ' and ' : ', '}}]
 
