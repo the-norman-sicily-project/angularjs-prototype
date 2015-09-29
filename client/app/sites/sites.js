@@ -32,8 +32,8 @@ angular.module('siciliaNormannaApp')
                 templateUrl: '/app/sites/sites-detail.html',
                 controller: 'SiteController'
             },
-            'location@sites.detail': {
-                templateUrl: '/app/sites/sites-location.html'
+            'details-monastery@sites.detail': {
+                templateUrl: '/app/sites/sites-details-monastery.html'
             }
         },
         resolve: {
