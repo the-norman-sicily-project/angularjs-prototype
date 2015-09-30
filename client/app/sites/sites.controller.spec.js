@@ -10,7 +10,7 @@ describe('Controller: SitesCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    SitesCtrl = $controller('SitesCtrl', {
+    SitesCtrl = $controller('SitesController', {
       $scope: scope
     });
   }));

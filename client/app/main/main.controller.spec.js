@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: MainCtrl', function() {
+describe('Controller: MainController', function() {
 
   // load the controller's module
   beforeEach(module('siciliaNormannaApp'));
@@ -19,7 +19,7 @@ describe('Controller: MainCtrl', function() {
 
     scope = $rootScope.$new();
     state = $state;
-    MainCtrl = $controller('MainCtrl', {
+    MainCtrl = $controller('MainController', {
       $scope: scope
     });
   }));

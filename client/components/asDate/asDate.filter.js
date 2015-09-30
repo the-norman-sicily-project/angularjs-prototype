@@ -3,10 +3,22 @@
 angular.module('siciliaNormannaApp')
   .filter('asDate', function () {
     return function (input) {
-        if (input == null) { return null; }
+        if (!_.isString(input)) { return null; }
+        if (input.indexOf('-') === -1) { return null; }
+        
+        var year, month, day;
+
         var parts = input.split('-');
-        return new Date(parseInt(parts[2], 10),
-                  parseInt(parts[1], 10) - 1,
-                  parseInt(parts[0], 10));
+        if (parts.length === 2) {
+            year = parts[1] ? parseInt(parts[1],10) : 0;
+            month = parts[0] ? parseInt(parts[0],10) - 1 : 0;
+            day = null;
+        } else if (parts.length === 3) {
+            year = parts[2] ? parseInt(parts[2],10) : 0;
+            month = parts[1] ? parseInt(parts[1],10) - 1 : 0;
+            day = parts[0] ? parseInt(parts[0],10) : 0;
+        }
+
+        return new Date(year, month, day);
     };
   });
