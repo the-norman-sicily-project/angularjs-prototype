@@ -7,7 +7,7 @@ module.exports = function(config) {
     basePath: '',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['mocha', 'chai', 'sinon-chai', 'chai-as-promised', 'chai-things'],
+    frameworks: ['mocha', 'chai-datetime', 'chai', 'sinon-chai', 'chai-as-promised', 'chai-things'],
 
     client: {
       mocha: {
@@ -36,8 +36,8 @@ module.exports = function(config) {
       //'client/components/**/*.coffee',
       'client/app/**/*.jade',
       'client/components/**/*.jade',
-      'client/app/**/*.html',
-      'client/components/**/*.html'
+      //'client/app/**/*.html',
+      //'client/components/**/*.html'
     ],
 
     preprocessors: {
@@ -88,7 +88,6 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: ['PhantomJS'],
-
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit

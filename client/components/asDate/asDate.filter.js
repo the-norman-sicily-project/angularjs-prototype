@@ -11,11 +11,11 @@ angular.module('siciliaNormannaApp')
         var parts = input.split('-');
         if (parts.length === 2) {
             year = parts[1] ? parseInt(parts[1],10) : 0;
-            month = parts[0] ? parseInt(parts[0],10) - 1 : 0;
-            day = null;
+            month = parts[0] ? parseInt(parts[0],10) : 0;
+            day = 1;
         } else if (parts.length === 3) {
             year = parts[2] ? parseInt(parts[2],10) : 0;
-            month = parts[1] ? parseInt(parts[1],10) - 1 : 0;
+            month = parts[1] ? parseInt(parts[1],10) : 0;
             day = parts[0] ? parseInt(parts[0],10) : 0;
         }
 
