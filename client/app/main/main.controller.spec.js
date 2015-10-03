@@ -6,7 +6,7 @@ describe('Controller: MainController', function() {
   beforeEach(module('siciliaNormannaApp'));
   beforeEach(module('stateMock'));
 
-  var MainCtrl;
+  var MainController;
   var scope;
   var state;
   var $httpBackend;
@@ -19,7 +19,7 @@ describe('Controller: MainController', function() {
 
     scope = $rootScope.$new();
     state = $state;
-    MainCtrl = $controller('MainController', {
+    MainController = $controller('MainController', {
       $scope: scope
     });
   }));
