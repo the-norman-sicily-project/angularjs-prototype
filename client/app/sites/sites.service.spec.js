@@ -10,9 +10,9 @@ describe('Service: Site Resource', function () {
         siteResource = SiteResource;
     }));
 
-    describe('Resource tests', function() {
-        it ('should respond with all sites', function() {
-            var expected = [{id: 1}, {id: 2}];
+    describe('get and query', function() {
+        it ('query should respond with all sites', function() {
+            var expected = [{id: '1'}, {id: '2'}];
             var actual = {};
 
             $httpBackend.whenGET('/api/sites').respond(expected);
@@ -28,21 +28,78 @@ describe('Service: Site Resource', function () {
             expect(actual.length).to.equal(expected.length);
         })
 
-        it('should return a single site with id', function() {
-            var expected = [{id: '1'}];
-            var actual = [{}];
+        it('get should return a single site with id', function() {
+            var expected = {id: '1'};
+            var actual = {};
 
             $httpBackend.whenGET('/api/sites/1').respond(expected);
 
-            siteResource.query({id:1}).$promise.then(function(result_) {
+            siteResource.get({id: '1'}).$promise.then(function(result_) {
                 actual = result_;
             });
 
-            expect(actual[0].id).to.be.undefined;
+            expect(actual.id).to.be.undefined;
 
             $httpBackend.flush();
 
             expect(actual.id).to.equal(expected.id);
         })
+    });
+});
+
+describe('Service: SiteService', function() {
+    var expectedSites = [{id: '1'}, {id: '2'}];
+    var expectedSite = {id: '1'};
+
+    beforeEach(function(){
+        var queryPromise, getPromise;
+        module('siciliaNormannaApp', function($provide) {
+            var SiteResourceMock = {
+                query: function() {
+                    var result = {$promise: queryPromise()};
+                    return result;
+                },
+                get: function(id) {
+                    return {$promise: getPromise()};
+                }
+            };
+
+            $provide.value('SiteResource', SiteResourceMock);
+        });
+        inject(function($q) {
+            queryPromise = function() {
+                var deferred = $q.defer();
+                deferred.resolve(expectedSites);
+                return deferred.promise;
+            }
+
+            getPromise = function() {
+                var deferred = $q.defer();
+                deferred.resolve(expectedSite);
+                return deferred.promise;
+            }
+        });
+    });
+
+    describe('getSites', function(){
+        it ('should return a promise which resolves to expected sites', inject(function($rootScope, SiteService) {
+            var actualSites = null;
+            SiteService.getSites().then(function(result) {
+                actualSites = result;
+            });
+            $rootScope.$digest();
+            expect(actualSites).to.equal(expectedSites);
+        }))
+    });
+
+    describe('getSite', function(){
+        it ('should return a promise which resolves to an expected site', inject(function($rootScope, SiteService) {
+            var actualSite = null;
+            SiteService.getSite().then(function(result) {
+                actualSite = result;
+            });
+            $rootScope.$digest();
+            expect(actualSite).to.equal(expectedSite);
+        }))
     });
 });

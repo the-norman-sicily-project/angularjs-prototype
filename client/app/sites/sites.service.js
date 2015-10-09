@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-    .service('SiteResource', function ($resource) {
+    .service('SiteResource', function($resource) {
         return $resource('/api/sites/:id');
     })
 
