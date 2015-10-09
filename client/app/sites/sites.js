@@ -10,8 +10,10 @@ angular.module('siciliaNormannaApp')
         controller: 'SitesController',
         resolve: {
             sitesData: function(SiteService) {
-                var SitesData = SiteService.query();
-                return SitesData.$promise;
+                return SiteService.query().$promise;
+            },
+            sitesByTypes: function(sitesData) {
+                return _.groupBy(sitesData, 'type');
             }
         },
         onEnter: function() {
@@ -38,8 +40,7 @@ angular.module('siciliaNormannaApp')
         },
         resolve: {
             siteData: function(SiteService, $stateParams) {
-                var SiteData = SiteService.get({id: $stateParams.id});
-                return SiteData.$promise;
+                return SiteService.get({id: $stateParams.id}).$promise;
             }
         },
         onEnter: function(){

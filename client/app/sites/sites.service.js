@@ -1,8 +1,18 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-  .factory('SiteService', function ($resource) {
-	return $resource('/api/sites/:id', {id: '@id'},{
-                'get': { method: 'GET', isArray: false }
-            });
-  });
+    .service('SiteResource', function ($resource) {
+        return $resource('/api/sites/:id');
+    })
+
+    .service('SiteService', function(SiteResource) {
+        this.getSite = function(id) {
+            return SiteResource.get({
+                id: id
+            }).$promise;
+        };
+
+        this.getSites = function() {
+            return SiteResource.query().$promise;
+        };
+    });
