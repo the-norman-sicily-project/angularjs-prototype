@@ -51,7 +51,7 @@ describe('Service: SiteService', function() {
     var expectedSites = [{id: '1'}, {id: '2'}];
     var expectedSite = {id: '1'};
 
-    beforeEach(function(){
+    beforeEach(function() {
         var queryPromise, getPromise;
         module('siciliaNormannaApp', function($provide) {
             var SiteResourceMock = {

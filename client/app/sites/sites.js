@@ -40,7 +40,7 @@ angular.module('siciliaNormannaApp')
         },
         resolve: {
             siteData: function(SiteService, $stateParams) {
-                return SiteService.getSite({id: $stateParams.id});
+                return SiteService.getSite($stateParams.id);
             }
         },
         onEnter: function(){

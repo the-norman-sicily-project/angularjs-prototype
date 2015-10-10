@@ -1,42 +1,149 @@
 'use strict';
 
 describe('Sites route test', function() {
-    var $q, $rootScope, $state, $injector, state_name = 'sites';
-    var SiteServiceMock = {};
+    var expectedSites = [{id: '1', type:'atype'}, {id: '2', type:'btype'}];
 
-    beforeEach(module('siciliaNormannaApp'), function($provide) {
-        $provide.service('SiteService', SiteServiceMock);
-        SiteServiceMock.query = function() {
-            //return $promise: $q.when({});
-            return null;
-        };
+    beforeEach(function() {
+        var getSitesPromise, getSitePromise;
+        module('siciliaNormannaApp', function($provide) {
+            var SiteServiceMock = {
+                getSites: function() {
+                    return getSitesPromise();
+                },
+                getSite: function(id) {
+                    return getSitePromise(id);
+                }
+            };
+
+            $provide.value('SiteService', SiteServiceMock);
+        });
+        inject(function($q) {
+            getSitesPromise = function() {
+                var deferred = $q.defer();
+                deferred.resolve(expectedSites);
+                return deferred.promise;
+            }
+
+            getSitePromise = function(id) {
+                var deferred = $q.defer();
+                deferred.resolve({id: id});
+                return deferred.promise;
+            }
+        });
     });
 
-    beforeEach(inject(function(_$q_, _$rootScope_, _$state_, _$injector_, $templateCache) {
-            $q = _$q_;
-            $rootScope = _$rootScope_;
-            $state = _$state_;
-            $injector = _$injector_;
+    var $location, $rootScope, $state, siteService, $httpBackend;
 
-            // We need to add the template entry into the templateCache if we ever
-            // specify a templateUrl
-            $templateCache.put('path/to/template.html', '');
-        }));
+    beforeEach(inject(function(_$rootScope_, _$state_, _$location_, _$injector_, _$httpBackend_, _$templateCache_, SiteService) {
+        $rootScope = _$rootScope_;
+        $state = _$state_;
+        $location = _$location_;
+        $httpBackend = _$httpBackend_;
+        siteService = _$injector_.get('SiteService');
 
-    it('should respond to URL', function() {
-        expect($state.href(state_name)).to.equal('/sites');
+        // We need to add the template entry into the templateCache if we ever
+        // specify a templateUrl
+        _$templateCache_.put('path/to/template.html', '');
+    }));
+
+    describe('state: sites', function() {
+        var state_name = 'sites';
+
+        it('should respond to URL', function() {
+            expect($state.href(state_name)).to.equal('/sites');
+        });
+
+        it('should be abstract state and url /sites, correct template URL and controller', function() {
+            var state = $state.get(state_name);
+            expect(state.name).to.equal(state_name);
+            expect(state.abstract).to.be.truthy;
+            expect(state.url).to.equal('/sites');
+            expect(state.controller).to.equal('SitesController');
+            expect(state.templateUrl).to.equal('app/sites/sites.html');
+            expect(state.resolve.sitesData).to.be.defined;
+            expect(state.resolve.sitesByTypes).to.be.defined;
+        });
+
+        describe('sitesData', function() {
+            it('should return resolved data', function() {
+                var state = $state.get(state_name);
+                var actualSites = null;
+                var sitesDataPromise = state.resolve.sitesData(siteService);
+                sitesDataPromise.then(function(result) {
+                    actualSites = result;
+                });
+                $httpBackend.expectGET('app/sites/sites.html').respond(200);
+                $location.path('/sites');
+                $rootScope.$digest();
+                expect(actualSites).to.equal(expectedSites);
+            });
+        });
+
+        describe('sitesByTypes', function() {
+            it('should return resolved data', function() {
+                var state = $state.get(state_name);
+                var actualSites = null;
+                var sitesDataPromise = state.resolve.sitesData(siteService);
+                sitesDataPromise.then(function(result) {
+                    actualSites = state.resolve.sitesByTypes(result);
+                });
+                $httpBackend.expectGET('app/sites/sites.html').respond(200);
+                $location.path('/sites');
+                $rootScope.$digest();
+                expect(actualSites).to.deep.equal(_.groupBy(expectedSites, 'type'));
+            });
+        });
     });
 
-    it('should be abstract state and url /sites', function() {
-        var state = $state.get(state_name);
-        expect(state.name).to.equal(state_name);
-        expect(state.abstract).to.be.truthy;
-        expect(state.url).to.equal('/sites');
+    describe('state: sites.list', function() {
+        var state_name = 'sites.list';
+
+        it('should respond to URL', function() {
+            expect($state.href(state_name)).to.equal('/sites');
+        });
+
+        it('should be correct url, template URL and controller', function() {
+            var state = $state.get(state_name);
+            expect(state.name).to.equal(state_name);
+            expect(state.abstract).to.be.falsy;
+            expect(state.url).to.equal('');
+            expect(state.controller).to.be.undefined;
+            expect(state.templateUrl).to.equal('app/sites/sites-list.html');
+        });
     });
 
-    it('should be fulfilled', function() {
-        var state = $state.get(state_name);
-        return expect(state.resolve.sitesData).to.be.fullfilled;
+    describe('state: sites.detail', function() {
+        var state_name = 'sites.detail';
+
+        it('should respond to URL', function() {
+            expect($state.href(state_name)).to.equal('/sites/');
+        });
+
+        it('should be correct url, template URL and controller', function() {
+            var state = $state.get(state_name);
+            expect(state.name).to.equal(state_name);
+            expect(state.abstract).to.be.falsy;
+            expect(state.url).to.equal('/:id');
+            expect(state.views[''].controller).to.equal('SiteController');
+            expect(state.views[''].templateUrl).to.equal('/app/sites/sites-detail.html');
+            expect(state.views['details-monastery@sites.detail'].templateUrl).to.equal('/app/sites/sites-details-monastery.html');
+            expect(state.resolve.siteData).to.be.defined;
+        });
+
+         describe('siteData', function() {
+            it('should return resolved data', function() {
+                var state = $state.get(state_name);
+                var actualSites = null;
+                var siteDataPromise = state.resolve.siteData(siteService, {id: 1});
+                siteDataPromise.then(function(result) {
+                    actualSites = result;
+                });
+                $httpBackend.expectGET('app/sites/sites.html').respond(200);
+                $location.path('/sites/1');
+                $rootScope.$digest();
+                expect(actualSites).to.deep.equal({id: 1});
+            });
+        });
     });
 });
 
