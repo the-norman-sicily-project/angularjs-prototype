@@ -71,7 +71,7 @@ describe('Site API:', function() {
 
     it('should respond with the newly created site', function() {
         console.log(newSite);
-      
+
       expect(newSite.datesVisited).to.be.instanceOf(Array);
       expect(newSite.datesVisited[0]).to.equal('15-08-2015');
       expect(newSite.extantRemains).to.equal(true);
@@ -82,7 +82,6 @@ describe('Site API:', function() {
       expect(newSite.name.en).to.equal('New Site');
       expect(newSite.name.it).to.equal('Nuovo Sito');
     });
-
   });
 
   describe('GET /api/sites/:id', function() {
@@ -107,8 +106,8 @@ describe('Site API:', function() {
     });
 
     it('should respond with the requested site', function() {
-      expect(site.name).to.equal('New Site');
-      expect(site.info).to.equal('This is the brand new site!!!');
+      expect(site.name.en).to.equal('New Site');
+      expect(site.notes).to.equal('This is the brand new site!!!');
     });
 
   });
@@ -120,8 +119,8 @@ describe('Site API:', function() {
       request(app)
         .put('/api/sites/' + newSite._id)
         .send({
-          name: 'Updated Site',
-          info: 'This is the updated site!!!'
+            name: {en: 'Updated Site'},
+            notes: 'This is the updated site!!!'
         })
         .expect(200)
         .expect('Content-Type', /json/)
@@ -139,10 +138,9 @@ describe('Site API:', function() {
     });
 
     it('should respond with the updated site', function() {
-      expect(updatedSite.name).to.equal('Updated Site');
-      expect(updatedSite.info).to.equal('This is the updated site!!!');
+      expect(updatedSite.name.en).to.equal('Updated Site');
+      expect(updatedSite.notes).to.equal('This is the updated site!!!');
     });
-
   });
 
   describe('DELETE /api/sites/:id', function() {
@@ -170,7 +168,5 @@ describe('Site API:', function() {
           done();
         });
     });
-
   });
-
 });
