@@ -70,8 +70,6 @@ describe('Site API:', function() {
     });
 
     it('should respond with the newly created site', function() {
-        console.log(newSite);
-
       expect(newSite.datesVisited).to.be.instanceOf(Array);
       expect(newSite.datesVisited[0]).to.equal('15-08-2015');
       expect(newSite.extantRemains).to.equal(true);
@@ -113,7 +111,7 @@ describe('Site API:', function() {
   });
 
   describe('PUT /api/sites/:id', function() {
-    var updatedSite
+    var updatedSite;
 
     beforeEach(function(done) {
       request(app)
