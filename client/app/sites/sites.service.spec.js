@@ -1,3 +1,5 @@
+/* jshint expr:true */
+
 'use strict';
 
 describe('Service: Site Resource', function () {
@@ -26,7 +28,7 @@ describe('Service: Site Resource', function () {
             $httpBackend.flush();
 
             expect(actual.length).to.equal(expected.length);
-        })
+        });
 
         it('get should return a single site with id', function() {
             var expected = {id: '1'};
@@ -43,7 +45,7 @@ describe('Service: Site Resource', function () {
             $httpBackend.flush();
 
             expect(actual.id).to.equal(expected.id);
-        })
+        });
     });
 });
 
@@ -60,7 +62,7 @@ describe('Service: SiteService', function() {
                     return result;
                 },
                 get: function(id) {
-                    return {$promise: getPromise()};
+                    return {$promise: getPromise(id)};
                 }
             };
 
@@ -71,13 +73,13 @@ describe('Service: SiteService', function() {
                 var deferred = $q.defer();
                 deferred.resolve(expectedSites);
                 return deferred.promise;
-            }
+            };
 
             getPromise = function() {
                 var deferred = $q.defer();
                 deferred.resolve(expectedSite);
                 return deferred.promise;
-            }
+            };
         });
     });
 
@@ -89,7 +91,7 @@ describe('Service: SiteService', function() {
             });
             $rootScope.$digest();
             expect(actualSites).to.equal(expectedSites);
-        }))
+        }));
     });
 
     describe('getSite', function(){
@@ -100,6 +102,6 @@ describe('Service: SiteService', function() {
             });
             $rootScope.$digest();
             expect(actualSite).to.equal(expectedSite);
-        }))
+        }));
     });
 });

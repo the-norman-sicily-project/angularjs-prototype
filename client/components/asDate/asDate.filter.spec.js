@@ -1,3 +1,5 @@
+/* jshint expr:true */
+
 'use strict';
 
 describe('Filter: asDate', function () {
@@ -19,7 +21,6 @@ describe('Filter: asDate', function () {
     });
 
     it('should return a date when given an unexpected date string', function () {
-        var expected = new Date('01/01/2015');
         expect(asDate('01/01/2015')).to.be.null;
     });
 

@@ -1,3 +1,5 @@
+/* jshint expr:true */
+
 'use strict';
 
 describe('Sites route test', function() {
@@ -22,19 +24,19 @@ describe('Sites route test', function() {
                 var deferred = $q.defer();
                 deferred.resolve(expectedSites);
                 return deferred.promise;
-            }
+            };
 
             getSitePromise = function(id) {
                 var deferred = $q.defer();
                 deferred.resolve({id: id});
                 return deferred.promise;
-            }
+            };
         });
     });
 
     var $location, $rootScope, $state, siteService, $httpBackend;
 
-    beforeEach(inject(function(_$rootScope_, _$state_, _$location_, _$injector_, _$httpBackend_, _$templateCache_, SiteService) {
+    beforeEach(inject(function(_$rootScope_, _$state_, _$location_, _$injector_, _$httpBackend_, _$templateCache_) {
         $rootScope = _$rootScope_;
         $state = _$state_;
         $location = _$location_;
@@ -47,15 +49,15 @@ describe('Sites route test', function() {
     }));
 
     describe('state: sites', function() {
-        var state_name = 'sites';
+        var stateName = 'sites';
 
         it('should respond to URL', function() {
-            expect($state.href(state_name)).to.equal('/sites');
+            expect($state.href(stateName)).to.equal('/sites');
         });
 
         it('should be abstract state and url /sites, correct template URL and controller', function() {
-            var state = $state.get(state_name);
-            expect(state.name).to.equal(state_name);
+            var state = $state.get(stateName);
+            expect(state.name).to.equal(stateName);
             expect(state.abstract).to.be.truthy;
             expect(state.url).to.equal('/sites');
             expect(state.controller).to.equal('SitesController');
@@ -66,7 +68,7 @@ describe('Sites route test', function() {
 
         describe('sitesData', function() {
             it('should return resolved data', function() {
-                var state = $state.get(state_name);
+                var state = $state.get(stateName);
                 var actualSites = null;
                 var sitesDataPromise = state.resolve.sitesData(siteService);
                 sitesDataPromise.then(function(result) {
@@ -81,7 +83,7 @@ describe('Sites route test', function() {
 
         describe('sitesByTypes', function() {
             it('should return resolved data', function() {
-                var state = $state.get(state_name);
+                var state = $state.get(stateName);
                 var actualSites = null;
                 var sitesDataPromise = state.resolve.sitesData(siteService);
                 sitesDataPromise.then(function(result) {
@@ -96,15 +98,15 @@ describe('Sites route test', function() {
     });
 
     describe('state: sites.list', function() {
-        var state_name = 'sites.list';
+        var stateName = 'sites.list';
 
         it('should respond to URL', function() {
-            expect($state.href(state_name)).to.equal('/sites');
+            expect($state.href(stateName)).to.equal('/sites');
         });
 
         it('should be correct url, template URL and controller', function() {
-            var state = $state.get(state_name);
-            expect(state.name).to.equal(state_name);
+            var state = $state.get(stateName);
+            expect(state.name).to.equal(stateName);
             expect(state.abstract).to.be.falsy;
             expect(state.url).to.equal('');
             expect(state.controller).to.be.undefined;
@@ -113,15 +115,15 @@ describe('Sites route test', function() {
     });
 
     describe('state: sites.detail', function() {
-        var state_name = 'sites.detail';
+        var stateName = 'sites.detail';
 
         it('should respond to URL', function() {
-            expect($state.href(state_name)).to.equal('/sites/');
+            expect($state.href(stateName)).to.equal('/sites/');
         });
 
         it('should be correct url, template URL and controller', function() {
-            var state = $state.get(state_name);
-            expect(state.name).to.equal(state_name);
+            var state = $state.get(stateName);
+            expect(state.name).to.equal(stateName);
             expect(state.abstract).to.be.falsy;
             expect(state.url).to.equal('/:id');
             expect(state.views[''].controller).to.equal('SiteController');
@@ -132,7 +134,7 @@ describe('Sites route test', function() {
 
          describe('siteData', function() {
             it('should return resolved data', function() {
-                var state = $state.get(state_name);
+                var state = $state.get(stateName);
                 var actualSites = null;
                 var siteDataPromise = state.resolve.siteData(siteService, {id: 1});
                 siteDataPromise.then(function(result) {
