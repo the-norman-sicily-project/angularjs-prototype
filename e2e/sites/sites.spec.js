@@ -1,23 +1,20 @@
-describe("E2E: Testing Routes", function() {
+describe ('e2e: main', function() {
 
-  beforeEach(function() {
-    browser().navigateTo('/');
-  });
+    beforeEach(function() {
+        browser.get('/');
+    });
 
-  it('should jump to the /sites path when / is accessed', function() {
-    browser().navigateTo('#/');
-    expect(browser().location().path()).toBe("/sites");
-  });
+    describe("E2E: Testing Routes", function() {
+        it('should have a working /sites route', function() {
+            browser.get('#/sites');
+            expect(browser.getCurrentUrl()).to.eventually.be.equal(browser.baseUrl + '/sites');
+        });
 
-  it('should have a working /sites route', function() {
-    browser().navigateTo('#/sites');
-    expect(browser().location().path()).toBe("/sites");
-  });
-
-  it('should have a working /sites/ID route', function() {
-    browser().navigateTo('#/sites/10');
-    expect(browser().location().path()).toBe("/sites/10");
-  });
+        it('should have a working /sites/ID route', function() {
+            browser.get('#/sites/10');
+            expect(browser.getCurrentUrl()).to.eventually.be.equal(browser.baseUrl + '/sites/10');
+        });
+    });
 
 });
 
