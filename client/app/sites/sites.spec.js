@@ -129,6 +129,7 @@ describe('Sites route test', function() {
             expect(state.views[''].controller).to.equal('SiteController');
             expect(state.views[''].templateUrl).to.equal('/app/sites/sites-detail.html');
             expect(state.views['details-monastery@sites.detail'].templateUrl).to.equal('/app/sites/sites-details-monastery.html');
+            expect(state.views['details-fortification@sites.detail'].templateUrl).to.equal('/app/sites/sites-details-fortification.html');
             expect(state.resolve.siteData).to.be.defined;
         });
 
