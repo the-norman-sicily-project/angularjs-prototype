@@ -22,4 +22,13 @@
                     div.site-detail-label Any extant remains on site:
                 div.col-lg-6
                     div.site-detail-data {{site.extantRemains ? 'Yes (may not date to the Norman period)' : 'No'}}
+            .row(ng-show='site.location && site.location.latitude && site.location.longitude')
+                div.col-lg-12
+                    map(center='{{site.location.latitude}},{{site.location.longitude}}', zoom='10')
+                        marker(id='{{site._id}}' position='{{site.location.latitude}},{{site.location.longitude}}')
+                        info-window(id='{{site._id}}-info', visible-on-marker='{{site._id}}')
+                            div(ng-non-bindable='')
+                                div(id='siteNotice')
+                                    div.site-detail-location.bold(id='locationHeading'){{site.name.en}}
+                                    div.site-detial-location(id='locationContent'){{site.type}}
 
