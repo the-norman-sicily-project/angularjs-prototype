@@ -1,12 +1,12 @@
 'use strict';
 
-describe('Controller: MainCtrl', function() {
+describe('Controller: MainController', function() {
 
   // load the controller's module
   beforeEach(module('siciliaNormannaApp'));
   beforeEach(module('stateMock'));
 
-  var MainCtrl;
+  var MainController;
   var scope;
   var state;
   var $httpBackend;
@@ -19,7 +19,7 @@ describe('Controller: MainCtrl', function() {
 
     scope = $rootScope.$new();
     state = $state;
-    MainCtrl = $controller('MainCtrl', {
+    MainController = $controller('MainController', {
       $scope: scope
     });
   }));

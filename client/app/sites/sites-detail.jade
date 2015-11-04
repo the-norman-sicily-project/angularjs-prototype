@@ -5,48 +5,31 @@
                 .col-lg-12
                     p.site-detail-title {{site.name.en}}
                     p.site-detail-location {{site.location.approximate}}, {{site.location.modernProvince}}
-                    div(ng-show='site.datesVisited') #[p.site-detail-date #[span(ng-repeat='dateVisited in site.datesVisited') {{dateVisited | asDate | date : 'MMM yyyy' }}{{$last ? '' : ($index==sites.datesVisited.length-2) ? ' and ' : ', '}}]]
+                    div(ng-show='site.datesVisited') #[p.site-detail-date #[span(ng-repeat='dateVisited in site.datesVisited') {{dateVisited | asDate | date : 'MMM yyyy' }}{{$last ? '' : ($index===sites.datesVisited.length-2) ? ' and ' : ', '}}]]
             .row
                 .col-lg-12
                     div [IMAGE PLACEHOLDER]
         .col-lg-5.gutter-border
-            .row
-                div.col-lg-6
-                    div.site-detail-label Status:
-                div.col-lg-6
-                    div.site-detail-data {{site.details.classificationAtFoundation}}
-            .row
-                div.col-lg-6
-                    div.site-detail-label Gender:
-                div.col-lg-6
-                    div.site-detail-data {{site.details.inhabitants.sex}}
-            .row
-                div.col-lg-6
-                    div.site-detail-label Earliest Surviving Record:
-                div.col-lg-6
-                    div.site-detail-data {{site.details.earliestSurvivingRecord}}
-            .row
-                div.col-lg-6
-                    div.site-detail-label Subject of Dedication:
-                div.col-lg-6
-                    div.site-detail-data {{site.details.subjectOfTheDedication}}
+            <div ui-view='details-monastery' ng-show="site.type==='monastery'" />
+            <div ui-view='details-fortification' ng-show="site.type==='fortification'" />
 
-    
-div(ng-show='site.primarySourceQuotation')
-em site.primarySourceQuotation
-p A {{site.type}} located in {{site.location.modernProvince}}. There are{{site.extantRemains ? ' ': ' no '}}remains on the site.
-
-div(ng-show='site.datesVisited')
-    p We visited the site on #[span(ng-repeat='dateVisited in site.datesVisited') {{dateVisited}}{{$last ? '' : ($index==sites.datesVisited.length-2) ? ' and ' : ', '}}]
-
-div(ng-show='site.notes')
-    p {{site.notes}}
-
-<div ui-view="location"></div>
-
-h2 Site Details
-    table
-        tr(ng-repeat='(key, value) in site.details')
-            td {{key}}
-            td {{value}}
+            .row(ng-show='site.name.variations.length > 0')
+                div.col-lg-6
+                    div.site-detail-label Known Spelling Variations:
+                div.col-lg-6
+                    div.site-detail-data  #[span(ng-repeat='variation in site.name.variations') {{variation}}{{$last ? '' : ($index===sites.name.variations.length-2) ? ' and ' : ', '}}]
+            .row(ng-show='site.extantRemains')
+                div.col-lg-6
+                    div.site-detail-label Any extant remains on site:
+                div.col-lg-6
+                    div.site-detail-data {{site.extantRemains ? 'Yes (may not date to the Norman period)' : 'No'}}
+            .row(ng-show='site.location && site.location.latitude && site.location.longitude')
+                div.col-lg-12
+                    map(center='{{site.location.latitude}},{{site.location.longitude}}', zoom='10')
+                        marker(id='{{site._id}}' position='{{site.location.latitude}},{{site.location.longitude}}')
+                        info-window(id='{{site._id}}-info', visible-on-marker='{{site._id}}')
+                            div(ng-non-bindable='')
+                                div(id='siteNotice')
+                                    div.site-detail-location.bold(id='locationHeading') {{site.name.en}}
+                                    div.site-detial-location(id='locationContent') {{site.type}}
 

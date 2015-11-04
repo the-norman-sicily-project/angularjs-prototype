@@ -1,0 +1,12 @@
+.row(ng-show='site.details.likelyExistedAsAFortificationAsOfTheReignOf')
+    div.col-lg-6
+        div.site-detail-label Likely existed as a fortification as of the reign of:
+    div.col-lg-6
+        div.site-detail-data {{site.details.likelyExistedAsAFortificationAsOfTheReignOf}}
+.row(ng-show='site.details.preExistingMuslimSite')
+    div.col-lg-6
+        div.site-detail-label Pre-existing Muslim site?:
+    div.col-lg-6
+        div.site-detail-data {{site.details.preExistingMuslimSite ? 'Yes' : 'No'}}
+
+
