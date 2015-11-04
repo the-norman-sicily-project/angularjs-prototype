@@ -36,6 +36,9 @@ angular.module('siciliaNormannaApp')
             },
             'details-monastery@sites.detail': {
                 templateUrl: '/app/sites/sites-details-monastery.html'
+            },
+            'details-fortification@sites.detail': {
+                templateUrl: '/app/sites/sites-details-fortification.html'
             }
         },
         resolve: {

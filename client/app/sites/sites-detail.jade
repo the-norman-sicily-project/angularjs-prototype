@@ -11,6 +11,7 @@
                     div [IMAGE PLACEHOLDER]
         .col-lg-5.gutter-border
             <div ui-view='details-monastery' ng-show="site.type==='monastery'" />
+            <div ui-view='details-fortification' ng-show="site.type==='fortification'" />
 
             .row(ng-show='site.name.variations.length > 0')
                 div.col-lg-6
@@ -29,6 +30,6 @@
                         info-window(id='{{site._id}}-info', visible-on-marker='{{site._id}}')
                             div(ng-non-bindable='')
                                 div(id='siteNotice')
-                                    div.site-detail-location.bold(id='locationHeading'){{site.name.en}}
-                                    div.site-detial-location(id='locationContent'){{site.type}}
+                                    div.site-detail-location.bold(id='locationHeading') {{site.name.en}}
+                                    div.site-detial-location(id='locationContent') {{site.type}}
 
