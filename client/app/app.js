@@ -6,7 +6,8 @@ angular.module('siciliaNormannaApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'ngMap'
+  'ngMap',
+  'ngAnimate'
 ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
