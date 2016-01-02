@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('siciliaNormannaApp', [
+  'siciliaNormannaApp.constants',
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -9,7 +10,7 @@ angular.module('siciliaNormannaApp', [
   'ngMap',
   'ngAnimate'
 ])
-  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+  .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
 

@@ -3,35 +3,35 @@
         .col-lg-7
             .row
                 .col-lg-12
-                    p.site-detail-title {{site.name.en}}
-                    p.site-detail-location {{site.location.approximate}}, {{site.location.modernProvince}}
-                    div(ng-show='site.datesVisited') #[p.site-detail-date #[span(ng-repeat='dateVisited in site.datesVisited') {{dateVisited | asDate | date : 'MMM yyyy' }}{{$last ? '' : ($index===sites.datesVisited.length-2) ? ' and ' : ', '}}]]
+                    p.site-detail-title {{site.siteData.name.en}}
+                    p.site-detail-location {{site.siteData.location.approximate}}, {{site.siteData.location.modernProvince}}
+                    div(ng-show='site.siteData.datesVisited') #[p.site-detail-date #[span(ng-repeat='dateVisited in site.siteData.datesVisited') {{dateVisited | asDate | date : 'MMM yyyy' }}{{$last ? '' : ($index===sites.datesVisited.length-2) ? ' and ' : ', '}}]]
             .row
                 .col-lg-12.gutter-border
-                    carousel(interval='carouselInterval')
-                        slide(ng-repeat='slide in site.slides' active='slide.active')
-                            img(ng-src='assets/images/{{site._id}}/{{slide.filename}}' style='max-height:300px; margin:0 auto;')
+                    uib-carousel(interval='site.carouselInterval')
+                        uib-slide(ng-repeat='slide in site.siteData.slides' active='slide.active')
+                            img(ng-src='assets/images/{{site.siteData._id}}/{{slide.filename}}' style='max-height:300px; margin:0 auto;')
         .col-lg-5.gutter-border
-            <div ui-view='details-monastery' ng-show="site.type==='monastery'" />
-            <div ui-view='details-fortification' ng-show="site.type==='fortification'" />
+            <div ui-view='details-monastery' ng-show="site.siteData.type==='monastery'" />
+            <div ui-view='details-fortification' ng-show="site.siteData.type==='fortification'" />
 
-            .row(ng-show='site.name.variations.length > 0')
+            .row(ng-show='site.siteData.name.variations.length > 0')
                 div.col-lg-6
                     div.site-detail-label Known Spelling Variations:
                 div.col-lg-6
-                    div.site-detail-data  #[span(ng-repeat='variation in site.name.variations') {{variation}}{{$last ? '' : ($index===sites.name.variations.length-2) ? ' and ' : ', '}}]
-            .row(ng-show='site.extantRemains')
+                    div.site-detail-data  #[span(ng-repeat='variation in site.siteData.name.variations') {{variation}}{{$last ? '' : ($index===sites.name.variations.length-2) ? ' and ' : ', '}}]
+            .row(ng-show='site.siteData.extantRemains')
                 div.col-lg-6
                     div.site-detail-label Any extant remains on site:
                 div.col-lg-6
                     div.site-detail-data {{site.extantRemains ? 'Yes (may not date to the Norman period)' : 'No'}}
-            .row(ng-show='site.location && site.location.latitude && site.location.longitude')
+            .row(ng-show='site.siteData.location && site.siteData.location.latitude && site.siteData.location.longitude')
                 div.col-lg-12
-                    map(center='{{site.location.latitude}},{{site.location.longitude}}', zoom='10')
-                        marker(id='{{site._id}}' position='{{site.location.latitude}},{{site.location.longitude}}')
-                        info-window(id='{{site._id}}-info', visible-on-marker='{{site._id}}')
+                    ng-map(center='[{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}]' zoom='10' default-style='true')
+                        marker(id='{{site.siteData._id}}' position='{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}' on-click="map.showInfoWindow(event, '{{site._id}}-info')")
+                        info-window(id='{{site.siteData._id}}-info', visible-on-marker='{{site.siteData._id}}')
                             div(ng-non-bindable='')
                                 div(id='siteNotice')
-                                    div.site-detail-location.bold(id='locationHeading') {{site.name.en}}
-                                    div.site-detial-location(id='locationContent' style='text-transform: capitalize') {{site.type}}
+                                    div.site-detail-location.bold(id='locationHeading') {{site.siteData.name.en}}
+                                    div.site-detial-location(id='locationContent' style='text-transform: capitalize') {{site.siteData.type}}
 

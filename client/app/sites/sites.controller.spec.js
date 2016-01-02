@@ -14,26 +14,7 @@ describe('Controller: SitesController', function () {
         });
     }));
 
-    it('should attach a list of sites grouped by type to the scope', function () {
-        expect(scope.sitesByTypes).to.equal(testData);
-    });
-});
-
-describe('Controller: SiteController', function () {
-
-    beforeEach(module('siciliaNormannaApp'));
-
-    var SitesController, scope;
-    var testData =  {site: {name: 'nameone'}};
-
-    beforeEach(inject(function ($rootScope, $controller) {
-        scope = $rootScope.$new();
-        SitesController = $controller('SiteController', {
-            $scope: scope, siteData: testData
-        });
-    }));
-
-    it('should attach the data for a single site to the scope', function () {
-        expect(scope.site).to.equal(testData);
+    it('should attach a list of sites grouped by type to the controller', function () {
+        expect(SitesController.sitesByTypes).to.equal(testData);
     });
 });

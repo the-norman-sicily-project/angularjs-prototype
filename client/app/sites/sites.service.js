@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-    .service('SiteResource', function($resource) {
+    .service('SiteResource', ['$resource', function($resource) {
         return $resource('/api/sites/:id');
-    })
+    }])
 
-    .service('SiteService', function(SiteResource) {
+    .service('SiteService', ['SiteResource', function(SiteResource) {
         this.getSite = function(id) {
             return SiteResource.get({
                 id: id
@@ -15,4 +15,4 @@ angular.module('siciliaNormannaApp')
         this.getSites = function() {
             return SiteResource.query().$promise;
         };
-    });
+    }]);

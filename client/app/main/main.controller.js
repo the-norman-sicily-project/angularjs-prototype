@@ -1,22 +1,29 @@
 'use strict';
 
-angular.module('siciliaNormannaApp')
-  .controller('MainController', function($scope, $http) {
-    $scope.awesomeThings = [];
+class MainController {
 
-    $http.get('/api/things').then(function(response) {
-      $scope.awesomeThings = response.data;
+  constructor($http) {
+    this.$http = $http;
+    this.awesomeThings = [];
+
+    $http.get('/api/things').then(response => {
+      this.awesomeThings = response.data;
     });
+  }
 
-    $scope.addThing = function() {
-      if ($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
+  addThing() {
+    if (this.newThing) {
+      this.$http.post('/api/things', { name: this.newThing });
+      this.newThing = '';
+    }
+  }
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-  });
+  deleteThing(thing) {
+    this.$http.delete('/api/things/' + thing._id);
+  }
+}
+
+angular.module('siciliaNormannaApp')
+  .controller('MainController', ['$http', function($http) {
+      return new MainController($http);
+  }]);

@@ -1,40 +1,40 @@
-.row(ng-show='site.details.classificationAtFoundation')
+.row(ng-show='site.siteData.details.classificationAtFoundation')
     div.col-lg-6
         div.site-detail-label Status:
     div.col-lg-6
-        div.site-detail-data {{site.details.classificationAtFoundation}}
-.row(ng-show='site.details.inhabitants.sex')
+        div.site-detail-data {{site.siteData.details.classificationAtFoundation}}
+.row(ng-show='site.siteData.details.inhabitants.sex')
     div.col-lg-6
         div.site-detail-label Gender:
     div.col-lg-6
-        div.site-detail-data {{site.details.inhabitants.sex}}
-.row(ng-show='site.details.earliestSurvivingRecord')
+        div.site-detail-data {{site.siteData.details.inhabitants.sex}}
+.row(ng-show='site.siteData.details.earliestSurvivingRecord')
     div.col-lg-6
         div.site-detail-label Earliest Surviving Record:
     div.col-lg-6
-        div.site-detail-data {{site.details.earliestSurvivingRecord}}
-.row(ng-show='site.details.subjectOfTheDedication')
+        div.site-detail-data {{site.siteData.details.earliestSurvivingRecord}}
+.row(ng-show='site.siteData.details.subjectOfTheDedication')
     div.col-lg-6
         div.site-detail-label Subject of Dedication:
     div.col-lg-6
-        div.site-detail-data {{site.details.subjectOfTheDedication}}
-.row(ng-show='site.details.order')
+        div.site-detail-data {{site.siteData.details.subjectOfTheDedication}}
+.row(ng-show='site.siteData.details.order')
     div.col-lg-6
         div.site-detail-label Monastic Order:
     div.col-lg-6
-        div.site-detail-data {{site.details.order}}
-.row(ng-show='site.details.founder.name')
+        div.site-detail-data {{site.siteData.details.order}}
+.row(ng-show='site.siteData.details.founder.name')
     div.col-lg-6
         div.site-detail-label Founder:
     div.col-lg-6
-        div.site-detail-data {{site.details.founder.socialPosition === null ? '' : site.details.founder.socialPosition + ' ' }}{{site.details.founder.name}}
-.row(ng-show='site.details.motherHouseTo.length > 0')
+        div.site-detail-data {{site.siteData.details.founder.socialPosition === null ? '' : site.siteData.details.founder.socialPosition + ' ' }}{{site.siteData.details.founder.name}}
+.row(ng-show='site.siteData.details.motherHouseTo.length > 0')
     div.col-lg-6
         div.site-detail-label Mother House To:
     div.col-lg-6
-        div.site-detail-data  #[span(ng-repeat='subjectHouse in site.motherHouseTo') {{subjectHouse}}{{$last ? '' : ($index===sites.motherHouseTo.length-2) ? ' and ' : ', '}}]
-.row(ng-show='site.details.subjectOf')
+        div.site-detail-data  #[span(ng-repeat='subjectHouse in site.siteData.motherHouseTo') {{subjectHouse}}{{$last ? '' : ($index===sites.siteData.motherHouseTo.length-2) ? ' and ' : ', '}}]
+.row(ng-show='site.siteData.details.subjectOf')
     div.col-lg-6
         div.site-detail-label Subject Of:
     div.col-lg-6
-        div.site-detail-data {{site.details.subjectOf}}
+        div.site-detail-data {{site.siteData.details.subjectOf}}

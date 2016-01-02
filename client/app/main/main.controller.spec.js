@@ -6,8 +6,8 @@ describe('Controller: MainController', function() {
   beforeEach(module('siciliaNormannaApp'));
   beforeEach(module('stateMock'));
 
-  var MainController;
   var scope;
+  var MainController;
   var state;
   var $httpBackend;
 
@@ -24,8 +24,8 @@ describe('Controller: MainController', function() {
     });
   }));
 
-  it('should attach a list of things to the scope', function() {
+  it('should attach a list of things to the controller', function() {
     $httpBackend.flush();
-    expect(scope.awesomeThings.length).to.equal(4);
+    expect(MainController.awesomeThings.length).to.equal(4);
   });
 });

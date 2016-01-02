@@ -1,4 +1,5 @@
 @import '../bower_components/bootstrap/less/bootstrap.less';
+@import '../bower_components/bootstrap/less/theme.less';
 @import '../bower_components/font-awesome/less/font-awesome.less';
 
 @icon-font-path: '../bower_components/bootstrap/fonts/';
@@ -15,7 +16,10 @@
   padding: 0.2em 0;
 }
 
-@font-family: Georgia, 'Times New Roman', Times, serif;
+@font-family-base: @font-family-serif;
+@navbar-default-color: #DE632A;
+@navbar-default-link-hover-color: #456E2E;
+@navbar-default-link-active-color: #456E2E;
 
 // injector
 @import 'main/main.less';

@@ -9,11 +9,11 @@
     "angular-resource": "~1.4.0",
     "angular-cookies": "~1.4.0",
     "angular-sanitize": "~1.4.0",
-    "angular-bootstrap": "~0.13.0",
+    "angular-bootstrap": "~0.14.0",
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.15",
-    "ngmap": "~1.13.15",
+    "ngmap": "~1.16.0",
     "angular-animate": "~1.4.8"
   },
   "devDependencies": {

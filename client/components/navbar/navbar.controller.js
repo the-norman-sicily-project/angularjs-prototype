@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('siciliaNormannaApp')
-  .controller('NavbarController', function ($scope) {
-    $scope.menu = [{
+class NavbarController {
+    constructor() {
+    this.menu = [{
         'title': 'Home',
         'state': 'main'
     },
@@ -17,8 +17,14 @@ angular.module('siciliaNormannaApp')
     {
         'title': 'About',
         'state': 'about'
-    }
-    ];
+    }];
 
-    $scope.isCollapsed = true;
+    this.isCollapsed = true;
+
+    }
+}
+
+angular.module('siciliaNormannaApp')
+  .controller('NavbarController', function(){
+    return new NavbarController();
   });

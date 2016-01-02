@@ -8,6 +8,7 @@ angular.module('siciliaNormannaApp')
         url: '/sites',
         templateUrl: 'app/sites/sites.html',
         controller: 'SitesController',
+        controllerAs: 'sites',
         resolve: {
             sitesData: function(SiteService) {
                 return SiteService.getSites();
@@ -32,7 +33,8 @@ angular.module('siciliaNormannaApp')
         views: {
             '': {
                 templateUrl: '/app/sites/sites-detail.html',
-                controller: 'SiteController'
+                controller: 'SiteController',
+                controllerAs: 'site'
             },
             'details-monastery@sites.detail': {
                 templateUrl: '/app/sites/sites-details-monastery.html'

@@ -5,6 +5,7 @@ angular.module('siciliaNormannaApp')
     return {
       templateUrl: 'components/header/header.html',
       restrict: 'E',
-      controller: 'HeaderController'
+      controller: 'HeaderController',
+      controllerAs: 'hdr'
     };
   });

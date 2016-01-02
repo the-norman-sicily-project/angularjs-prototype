@@ -5,18 +5,9 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-      uri: 'mongodb://localhost:27018/sicilianormanna-dev'
-  },
-  sequelize: {
-    uri: 'sqlite://',
-    options: {
-      logging: false,
-      storage: 'dev.sqlite',
-      define: {
-        timestamps: false
-      }
-    }
+    uri: 'mongodb://localhost:27018/sicilianormanna-dev'
   },
 
+  // Seed database on startup
   seedDB: true
 };

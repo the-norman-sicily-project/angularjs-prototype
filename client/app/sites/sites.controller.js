@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('siciliaNormannaApp')
-    .controller('SitesController', function ($scope, sitesByTypes) {
-        $scope.sitesByTypes = sitesByTypes;
-    })
-    .controller('SiteController', function ($scope, $animate, siteData) {
-        $scope.carouselInterval = 3000;
-        $scope.site = siteData;
-    });
+    class SitesController {
+        constructor($scope, sitesByTypes) {
+            this.sitesByTypes = sitesByTypes;
+        }
+    }
+
+    angular.module('siciliaNormannaApp')
+        .controller('SitesController', ['$scope', 'sitesByTypes', function($scope, sitesByTypes){
+            return new SitesController($scope, sitesByTypes);
+        }]);

@@ -6,6 +6,7 @@ angular.module('siciliaNormannaApp')
       .state('main', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: 'MainController'
+        controller: 'MainController',
+        controllerAs: 'main'
       });
   });
