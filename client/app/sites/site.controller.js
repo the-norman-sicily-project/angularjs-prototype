@@ -1,7 +1,5 @@
 'use strict';
 
-import google from 'google.maps';
-
 class SiteController {
     constructor($scope, $animate, siteData) {
         this.carouselInterval = 3000;
@@ -14,6 +12,6 @@ class SiteController {
 }
 
 angular.module('siciliaNormannaApp')
-    .controller('SiteController', ['$scope', '$animate', 'siteData', 'NgMap', function($scope, $animate, siteData, NgMap) {
-        return new SiteController($scope, $animate, siteData, NgMap);
+    .controller('SiteController', ['$scope', '$animate', 'siteData', function($scope, $animate, siteData) {
+        return new SiteController($scope, $animate, siteData);
     }]);
