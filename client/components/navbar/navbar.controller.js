@@ -4,7 +4,7 @@ class NavbarController {
     constructor() {
     this.menu = [{
         'title': 'Home',
-        'state': 'main'
+        'state': 'home'
     },
     {
         'title': 'People',
