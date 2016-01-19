@@ -57,6 +57,10 @@ module.exports = function (grunt) {
       }
     },
     watch: {
+      babel: {
+        files: ['<%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock).js'],
+        tasks: ['newer:babel:client']
+      },
       ngconstant: {
         files: ['<%= yeoman.server %>/config/environment/shared.js'],
         tasks: ['ngconstant']
@@ -430,10 +434,12 @@ module.exports = function (grunt) {
         'ngconstant'
       ],
       server: [
+        'newer:babel:client',
         'jade',
         'less',
       ],
       test: [
+        'newer:babel:client',
         'jade',
         'less',
       ],
@@ -447,6 +453,7 @@ module.exports = function (grunt) {
         }
       },
       dist: [
+        'newer:babel:client',
         'jade',
         'less',
         'imagemin'
@@ -560,6 +567,14 @@ module.exports = function (grunt) {
         optional: [
           'es7.classProperties'
         ]
+      },
+      client: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.client %>',
+          src: ['{app,components}/**/!(*.spec).js'],
+          dest: '.tmp'
+        }]
       },
       server: {
         options: {
