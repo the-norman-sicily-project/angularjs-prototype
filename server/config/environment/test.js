@@ -7,14 +7,5 @@ module.exports = {
   mongo: {
       uri: 'mongodb://localhost:27017/sicilianormanna-test'
   },
-  sequelize: {
-    uri: 'sqlite://',
-    options: {
-      logging: false,
-      storage: 'test.sqlite',
-      define: {
-        timestamps: false
-      }
-    }
-  }
+  seedDB: true
 };

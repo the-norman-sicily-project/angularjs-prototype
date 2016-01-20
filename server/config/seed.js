@@ -5,3 +5,6 @@
 
 'use strict';
 
+import Site from '../api/site/site.model'
+
+Site.find({}).remove();

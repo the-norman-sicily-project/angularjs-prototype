@@ -31,27 +31,27 @@ describe('Site API:', function() {
   });
 
   describe('POST /api/sites', function() {
-    beforeEach(function(done) {
+      beforeEach(function(done) {
         var site = {
             name: {
-                en: 'New Site',
-                it: 'Nuovo Sito',
-                variations: ['a variant'],
+                en: 'New Site One',
+                it: 'Nuovo Sito Uno',
+                variations: ['another variant'],
             },
             location: {
-                approximate: 'Sclafani Bagni',
+                approximate: 'Taormina',
                 elevation: null,
                 isExact: false,
-                latitude: 37.82,
-                longitude: 13.85,
-                modernProvince: 'Palermo'
+                latitude: 45.95,
+                longitude: 12.33,
+                modernProvince: 'Messina'
             },
-            bibliography: 'bibliography',
-            notes: 'This is the brand new site!!!',
+            bibliography: 'Some book',
+            notes: 'This is the swanky site!!!',
             extantRemains: true,
-            primarySourceQuotation: 'some quote',
-            type: 'some type',
-            datesVisited: ['15-08-2015'],
+            primarySourceQuotation: 'a quote',
+            type: 'a type',
+            datesVisited: ['10-09-2014'],
             details: []
         };
 
@@ -71,14 +71,14 @@ describe('Site API:', function() {
 
     it('should respond with the newly created site', function() {
       expect(newSite.datesVisited).to.be.instanceOf(Array);
-      expect(newSite.datesVisited[0]).to.equal('15-08-2015');
+      expect(newSite.datesVisited[0]).to.equal('10-09-2014');
       expect(newSite.extantRemains).to.equal(true);
-      expect(newSite.type).to.equal('some type');
-      expect(newSite.primarySourceQuotation).to.equal('some quote');
-      expect(newSite.notes).to.equal('This is the brand new site!!!');
-      expect(newSite.bibliography).to.equal('bibliography');
-      expect(newSite.name.en).to.equal('New Site');
-      expect(newSite.name.it).to.equal('Nuovo Sito');
+      expect(newSite.type).to.equal('a type');
+      expect(newSite.primarySourceQuotation).to.equal('a quote');
+      expect(newSite.notes).to.equal('This is the swanky site!!!');
+      expect(newSite.bibliography).to.equal('Some book');
+      expect(newSite.name.en).to.equal('New Site One');
+      expect(newSite.name.it).to.equal('Nuovo Sito Uno');
     });
   });
 
@@ -104,8 +104,8 @@ describe('Site API:', function() {
     });
 
     it('should respond with the requested site', function() {
-      expect(site.name.en).to.equal('New Site');
-      expect(site.notes).to.equal('This is the brand new site!!!');
+      expect(site.name.en).to.equal('New Site One');
+      expect(site.notes).to.equal('This is the swanky site!!!');
     });
 
   });
