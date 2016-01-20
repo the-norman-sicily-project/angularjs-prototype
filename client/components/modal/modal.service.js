@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('<%= scriptAppName %>')
+angular.module('siciliaNormannaApp')
   .factory('Modal', function ($rootScope, $modal) {
     /**
      * Opens a modal

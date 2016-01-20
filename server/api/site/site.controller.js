@@ -45,6 +45,9 @@ function saveUpdates(updates) {
       .spread(function(updated) {
           console.log(updated);
         return updated;
+      })
+      .catch(function(err){
+        console.log(err);
       });
   };
 }
