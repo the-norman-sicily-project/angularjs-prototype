@@ -6,6 +6,9 @@ angular.module('siciliaNormannaApp')
       .state('about', {
         url: '/about',
         templateUrl: 'app/about/about.html',
-        controller: 'AboutController'
+        controller: 'AboutController',
+        onEnter: function() {
+          console.log('enter about');
+        }
       });
   });
