@@ -1,6 +1,12 @@
 'use strict';
 
+class AboutController {
+  constructor() {
+    this.messsage = 'Hello';
+  }
+}
+
 angular.module('siciliaNormannaApp')
-  .controller('AboutController', function ($scope) {
-    $scope.message = 'Hello';
+  .controller('AboutController', function() {
+    return new AboutController();
   });
