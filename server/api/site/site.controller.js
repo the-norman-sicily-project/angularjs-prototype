@@ -43,7 +43,11 @@ function saveUpdates(updates) {
     var updated = _.merge(entity, updates);
     return updated.saveAsync()
       .spread(function(updated) {
+          console.log(updated);
         return updated;
+      })
+      .catch(function(err){
+        console.log(err);
       });
   };
 }

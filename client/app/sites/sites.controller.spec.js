@@ -1,21 +1,20 @@
 'use strict';
 
-describe('Controller: SitesCtrl', function () {
+describe('Controller: SitesController', function () {
 
-  // load the controller's module
-  beforeEach(module('siciliaNormannaApp'));
+    beforeEach(module('siciliaNormannaApp'));
 
-  var SitesCtrl, scope;
+    var SitesController, scope;
+    var testData =  [{type: 'typeone', site: {name: 'nameone'}}, {type: 'typetwo', site: {name: 'nametwo'}}];
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    SitesCtrl = $controller('SitesCtrl', {
-      $scope: scope
+    beforeEach(inject(function ($rootScope, $controller) {
+        scope = $rootScope.$new();
+        SitesController = $controller('SitesController', {
+            $scope: scope, sitesByTypes: testData
+        });
+    }));
+
+    it('should attach a list of sites grouped by type to the controller', function () {
+        expect(SitesController.sitesByTypes).to.equal(testData);
     });
-  }));
-
-  it('should ...', function () {
-    expect(1).to.equal(1);
-  });
 });

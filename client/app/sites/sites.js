@@ -8,10 +8,13 @@ angular.module('siciliaNormannaApp')
         url: '/sites',
         templateUrl: 'app/sites/sites.html',
         controller: 'SitesController',
+        controllerAs: 'sites',
         resolve: {
             sitesData: function(SiteService) {
-                var SitesData = SiteService.query();
-                return SitesData.$promise;
+                return SiteService.getSites();
+            },
+            sitesByTypes: function(sitesData) {
+                return _.groupBy(sitesData, 'type');
             }
         },
         onEnter: function() {
@@ -30,16 +33,19 @@ angular.module('siciliaNormannaApp')
         views: {
             '': {
                 templateUrl: '/app/sites/sites-detail.html',
-                controller: 'SiteController'
+                controller: 'SiteController',
+                controllerAs: 'site'
             },
-            'location@sites.detail': {
-                templateUrl: '/app/sites/sites-location.html'
+            'details-monastery@sites.detail': {
+                templateUrl: '/app/sites/sites-details-monastery.html'
+            },
+            'details-fortification@sites.detail': {
+                templateUrl: '/app/sites/sites-details-fortification.html'
             }
         },
         resolve: {
             siteData: function(SiteService, $stateParams) {
-                var SiteData = SiteService.get({id: $stateParams.id});
-                return SiteData.$promise;
+                return SiteService.getSite($stateParams.id);
             }
         },
         onEnter: function(){

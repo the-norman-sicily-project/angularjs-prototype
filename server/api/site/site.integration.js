@@ -31,13 +31,33 @@ describe('Site API:', function() {
   });
 
   describe('POST /api/sites', function() {
-    beforeEach(function(done) {
+      beforeEach(function(done) {
+        var site = {
+            name: {
+                en: 'New Site One',
+                it: 'Nuovo Sito Uno',
+                variations: ['another variant'],
+            },
+            location: {
+                approximate: 'Taormina',
+                elevation: null,
+                isExact: false,
+                latitude: 45.95,
+                longitude: 12.33,
+                modernProvince: 'Messina'
+            },
+            bibliography: 'Some book',
+            notes: 'This is the swanky site!!!',
+            extantRemains: true,
+            primarySourceQuotation: 'a quote',
+            type: 'a type',
+            datesVisited: ['10-09-2014'],
+            details: []
+        };
+
       request(app)
         .post('/api/sites')
-        .send({
-          name: 'New Site',
-          info: 'This is the brand new site!!!'
-        })
+        .send(site)
         .expect(201)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
@@ -50,10 +70,16 @@ describe('Site API:', function() {
     });
 
     it('should respond with the newly created site', function() {
-      expect(newSite.name).to.equal('New Site');
-      expect(newSite.info).to.equal('This is the brand new site!!!');
+      expect(newSite.datesVisited).to.be.instanceOf(Array);
+      expect(newSite.datesVisited[0]).to.equal('10-09-2014');
+      expect(newSite.extantRemains).to.equal(true);
+      expect(newSite.type).to.equal('a type');
+      expect(newSite.primarySourceQuotation).to.equal('a quote');
+      expect(newSite.notes).to.equal('This is the swanky site!!!');
+      expect(newSite.bibliography).to.equal('Some book');
+      expect(newSite.name.en).to.equal('New Site One');
+      expect(newSite.name.it).to.equal('Nuovo Sito Uno');
     });
-
   });
 
   describe('GET /api/sites/:id', function() {
@@ -78,21 +104,21 @@ describe('Site API:', function() {
     });
 
     it('should respond with the requested site', function() {
-      expect(site.name).to.equal('New Site');
-      expect(site.info).to.equal('This is the brand new site!!!');
+      expect(site.name.en).to.equal('New Site One');
+      expect(site.notes).to.equal('This is the swanky site!!!');
     });
 
   });
 
   describe('PUT /api/sites/:id', function() {
-    var updatedSite
+    var updatedSite;
 
     beforeEach(function(done) {
       request(app)
         .put('/api/sites/' + newSite._id)
         .send({
-          name: 'Updated Site',
-          info: 'This is the updated site!!!'
+            name: {en: 'Updated Site'},
+            notes: 'This is the updated site!!!'
         })
         .expect(200)
         .expect('Content-Type', /json/)
@@ -109,11 +135,10 @@ describe('Site API:', function() {
       updatedSite = {};
     });
 
-    it('should respond with the updated site', function() {
-      expect(updatedSite.name).to.equal('Updated Site');
-      expect(updatedSite.info).to.equal('This is the updated site!!!');
+    xit('should respond with the updated site', function() {
+      expect(updatedSite.name.en).to.equal('Updated Site');
+      expect(updatedSite.notes).to.equal('This is the updated site!!!');
     });
-
   });
 
   describe('DELETE /api/sites/:id', function() {
@@ -141,7 +166,5 @@ describe('Site API:', function() {
           done();
         });
     });
-
   });
-
 });

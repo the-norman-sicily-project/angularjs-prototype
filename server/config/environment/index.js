@@ -32,9 +32,6 @@ var all = {
     session: 'sicilia-normanna-secret'
   },
 
-  // List of user roles
-  userRoles: ['guest', 'user', 'admin'],
-
   // MongoDB connection options
   mongo: {
     options: {
@@ -49,4 +46,5 @@ var all = {
 // ==============================================
 module.exports = _.merge(
   all,
+  require('./shared'),
   require('./' + process.env.NODE_ENV + '.js') || {});

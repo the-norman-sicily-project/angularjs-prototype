@@ -1,16 +1,30 @@
 'use strict';
 
-angular.module('siciliaNormannaApp')
-  .controller('NavbarController', function ($scope) {
-    $scope.menu = [{
+class NavbarController {
+    constructor() {
+    this.menu = [{
         'title': 'Home',
-        'state': 'main'
+        'state': 'home'
     },
     {
-        'title': 'Sites',
+        'title': 'People',
+        'state': 'people'
+    },
+    {
+        'title': 'Places',
         'state': 'sites.list'
     },
-    ];
+    {
+        'title': 'About',
+        'state': 'about'
+    }];
 
-    $scope.isCollapsed = true;
+    this.isCollapsed = true;
+
+    }
+}
+
+angular.module('siciliaNormannaApp')
+  .controller('NavbarController', function(){
+    return new NavbarController();
   });

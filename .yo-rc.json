@@ -27,7 +27,8 @@
       "jasmine": false,
       "should": false,
       "expect": true
-    }
+    },
+    "generatorVersion": "3.1.1"
   },
   "generator-ng-component": {
     "routeDirectory": "client/app/",

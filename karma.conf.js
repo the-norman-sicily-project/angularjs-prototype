@@ -7,7 +7,7 @@ module.exports = function(config) {
     basePath: '',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['mocha', 'chai', 'sinon-chai', 'chai-as-promised', 'chai-things'],
+    frameworks: ['mocha', 'chai-datetime', 'chai', 'sinon-chai', 'chai-as-promised', 'chai-things'],
 
     client: {
       mocha: {
@@ -24,26 +24,22 @@ module.exports = function(config) {
       'client/bower_components/angular-cookies/angular-cookies.js',
       'client/bower_components/angular-sanitize/angular-sanitize.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'client/bower_components/lodash/dist/lodash.compat.js',
+      'client/bower_components/lodash/lodash.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'client/bower_components/ngmap/build/scripts/ng-map.js',
+      'client/bower_components/angular-animate/angular-animate.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',
-      'client/app/app.coffee',
-      'client/app/**/*.js',
-      'client/app/**/*.coffee',
-      'client/components/**/*.js',
-      'client/components/**/*.coffee',
-      'client/app/**/*.jade',
-      'client/components/**/*.jade',
-      'client/app/**/*.html',
-      'client/components/**/*.html'
+      'client/{app,components}/**/*.module.js',
+      'client/{app,components}/**/*.js',
+      'client/{app,components}/**/*.{jade,html}'
     ],
 
     preprocessors: {
       '**/*.jade': 'ng-jade2js',
       '**/*.html': 'html2js',
-      '**/*.coffee': 'coffee',
+      'client/{app,components}/**/*.js': 'babel'
     },
 
     ngHtml2JsPreprocessor: {
@@ -54,7 +50,17 @@ module.exports = function(config) {
       stripPrefix: 'client/'
     },
 
-    
+    babelPreprocessor: {
+        options: {
+            sourceMap: 'inline'
+        },
+        filename: function (file) {
+            return file.originalPath.replace(/\*.js$/, '.es5.js');
+        },
+        sourceFileName: function (file) {
+            return file.originalPath
+        }
+    },
 
     // list of files / patterns to exclude
     exclude: [],
@@ -88,7 +94,6 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: ['PhantomJS'],
-
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit

@@ -1,11 +1,13 @@
 .container
     .row
         .col-lg-12
-            h1.page-header Known Sites:
-            div(ng-repeat='(siteType, sites) in siteTypes')
-                h2 {{siteType}}
-                ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='site in sites')
-                    li
-                        a(ui-sref='sites.detail({id: site._id})', tooltip='{{site.location.modernProvince}}')
-                            | {{site.name.en}}
+            uib-accordion
+                uib-accordion-group(ng-repeat='type in sites.sitesByTypes')
+                    uib-accordion-heading
+                        span(style='text-transform:capitalize')
+                            | {{type[0].type}}
+                    ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='site in type')
+                        li
+                            a(ui-sref='sites.detail({id: site._id})', uib-tooltip='{{site.location.modernProvince}}')
+                                | {{site.name.en}}
 

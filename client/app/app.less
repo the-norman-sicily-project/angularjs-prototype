@@ -1,4 +1,5 @@
 @import '../bower_components/bootstrap/less/bootstrap.less';
+@import '../bower_components/bootstrap/less/theme.less';
 @import '../bower_components/font-awesome/less/font-awesome.less';
 
 @icon-font-path: '../bower_components/bootstrap/fonts/';
@@ -15,12 +16,21 @@
   padding: 0.2em 0;
 }
 
+@font-family-base: @font-family-serif;
+@navbar-default-color: #DE632A;
+@navbar-default-link-hover-color: #456E2E;
+@navbar-default-link-active-color: #456E2E;
+
 // injector
-@import 'main/main.less';
+@import 'about/about.less';
+@import 'home/home.less';
+@import 'people/people.less';
 @import 'sites/sites-detail.less';
+@import 'sites/sites-details-fortification.less';
+@import 'sites/sites-details-monastery.less';
 @import 'sites/sites-list.less';
-@import 'sites/sites-location.less';
 @import 'sites/sites.less';
 @import '../components/footer/footer.less';
+@import '../components/header/header.less';
 @import '../components/modal/modal.less';
 // endinjector

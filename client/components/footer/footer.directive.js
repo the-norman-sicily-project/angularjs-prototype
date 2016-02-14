@@ -5,7 +5,7 @@ angular.module('siciliaNormannaApp')
     return {
       templateUrl: 'components/footer/footer.html',
       restrict: 'E',
-      link: function (scope, element) {
+      link: function(scope, element) {
         element.addClass('footer');
       }
     };
