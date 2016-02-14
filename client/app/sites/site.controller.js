@@ -6,7 +6,7 @@ class SiteController {
         this.siteData = siteData;
 
         $scope.$on('mapInitialized', function(event, map) {
-            google.maps.event.trigger(map,'resize');
+            google.maps.event.trigger(map, 'resize');
         });
     }
 }

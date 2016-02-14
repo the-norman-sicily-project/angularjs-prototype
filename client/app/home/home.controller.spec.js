@@ -5,17 +5,17 @@ describe('Controller: HomeController', function () {
   // load the controller's module
   beforeEach(module('siciliaNormannaApp'));
 
-  var HomeCtrl, scope;
+  var HomeController, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    HomeCtrl = $controller('HomeController', {
+    HomeController = $controller('HomeController', {
       $scope: scope
     });
   }));
 
-  it('should ...', function () {
-    expect(1).to.equal(1);
+  it('should have a non-empty string for idrisi popover content', function () {
+    expect(HomeController.idrisiMapPopoverContent).should.not.be.empty;
   });
 });
