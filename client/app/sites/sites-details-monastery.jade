@@ -25,7 +25,7 @@
         div.site-detail-data {{site.siteData.details.order}}
 .row(ng-show='site.siteData.details.founder.name')
     div.col-lg-6
-        div.site-detail-label Founder:
+        div.site-detail-label Founder(s):
     div.col-lg-6
         div.site-detail-data {{site.siteData.details.founder.socialPosition === null ? '' : site.siteData.details.founder.socialPosition + ' ' }}{{site.siteData.details.founder.name}}
 .row(ng-show='site.siteData.details.motherHouseTo.length > 0')
