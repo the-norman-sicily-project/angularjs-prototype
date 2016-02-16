@@ -32,15 +32,15 @@ angular.module('siciliaNormannaApp')
         url: '/:id',
         views: {
             '': {
-                templateUrl: '/app/sites/sites-detail.html',
+                templateUrl: 'app/sites/sites-detail.html',
                 controller: 'SiteController',
                 controllerAs: 'site'
             },
             'details-monastery@sites.detail': {
-                templateUrl: '/app/sites/sites-details-monastery.html'
+                templateUrl: 'app/sites/sites-details-monastery.html'
             },
             'details-fortification@sites.detail': {
-                templateUrl: '/app/sites/sites-details-fortification.html'
+                templateUrl: 'app/sites/sites-details-fortification.html'
             }
         },
         resolve: {
