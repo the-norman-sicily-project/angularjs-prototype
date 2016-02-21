@@ -1,7 +1,9 @@
 'use strict';
 
-var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+var Promise = require('bluebird');
+var mongoose = Promise.promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
+var fs = require('fs');
 
 var SiteSchema = new Schema({
   name: {
@@ -32,11 +34,17 @@ var SiteSchema = new Schema({
 SiteSchema
   .virtual('slides')
   .get(function() {
+    console.log('0');
     var slides = [];
-    var numberSlides = this.get('number_of_slides');
-    for (var i = 0; i < numberSlides; i++) {
-        var s = { filename: (i + 1).toString() + '.jpg' }
-        slides.push(s);
+    var siteImagesPath = __dirname + "/../../media/images/sites/" + this._id.toString();
+    try {
+      fs.statSync(siteImagesPath);
+      var files = fs.readdirSync(siteImagesPath);
+      slides = files.map(function(file) {
+       return {filename: file}; 
+      });
+    } catch(err) {
+      console.log('Directory ' + siteImagesPath + ' does not exist!');
     }
     return slides;
   });
