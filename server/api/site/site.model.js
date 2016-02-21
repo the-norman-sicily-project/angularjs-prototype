@@ -1,7 +1,6 @@
 'use strict';
 
-var Promise = require('bluebird');
-var mongoose = Promise.promisifyAll(require('mongoose'));
+var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 var fs = require('fs');
 
@@ -34,8 +33,10 @@ var SiteSchema = new Schema({
 SiteSchema
   .virtual('slides')
   .get(function() {
-    console.log('0');
     var slides = [];
+    // images are assumed to be kept in a single directory per site with no
+    // subdirectories. Only image files will be kept in these directories
+    // (no listing files, etc.)
     var siteImagesPath = __dirname + "/../../media/images/sites/" + this._id.toString();
     try {
       fs.statSync(siteImagesPath);
