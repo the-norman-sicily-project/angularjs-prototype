@@ -197,6 +197,7 @@ module.exports = function (grunt) {
     'node-inspector': {
       custom: {
         options: {
+          'preload': false,
           'web-host': 'localhost'
         }
       }
@@ -207,7 +208,9 @@ module.exports = function (grunt) {
       debug: {
         script: '<%= yeoman.server %>',
         options: {
+          ignore: ['node_modules/**'],
           nodeArgs: ['--debug-brk'],
+          watch: ['server'],
           env: {
             PORT: process.env.PORT || 9000
           },
@@ -255,7 +258,6 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/<%= yeoman.client %>/!(bower_components){,*/}*.{js,css}',
           '<%= yeoman.dist %>/<%= yeoman.client %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.dist %>/<%= yeoman.client %>/assets/fonts/*',
-          '!<%= yeoman.dist %>/<%= yeoman.client %>/assets/images/sites'
         ]
       }
     },
