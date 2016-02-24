@@ -14,7 +14,7 @@ angular.module('siciliaNormannaApp')
                 return SiteService.getSites();
             },
             sitesByTypes: function(sitesData) {
-                return _.groupBy(sitesData, 'type');
+                return _.groupBy(_.sortBy(sitesData, 'name.en'), 'type');
             }
         },
         onEnter: function() {
