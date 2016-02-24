@@ -50,4 +50,36 @@ SiteSchema
     return slides;
   });
 
+SiteSchema
+  .virtual('tooltipText')
+  .get(function(){
+    var tooltipElements = [];
+
+    if (this.details){
+      if (this.details.order) {
+        tooltipElements.push(this.details.order);
+      }
+
+      if (this.details.classificationAtFoundation) {
+        tooltipElements.push(this.details.classificationAtFoundation);
+      }
+    }
+
+    if (this.location) {
+      if (this.location.approximate) {
+        tooltipElements.push(this.location.approximate);
+      }
+
+      if (this.location.modernProvince) {
+        tooltipElements.push('Province of ' + this.location.modernProvince);
+      }
+
+      if (this.location.elevation) {
+        tooltipElements.push(this.location.elevation + ' Meters');
+      }
+    }
+
+    return tooltipElements.join(', ');
+  });
+
 module.exports = mongoose.model('Site', SiteSchema);

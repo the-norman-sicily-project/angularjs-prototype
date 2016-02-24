@@ -8,6 +8,6 @@
                             | {{type.length | pluralize:type[0].type}}
                     ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='site in type')
                         li
-                            a(ui-sref='sites.detail({id: site._id})', uib-tooltip='{{site.location.modernProvince}}')
+                            a(ui-sref='sites.detail({id: site._id})', uib-tooltip='{{site.tooltipText}}')
                                 | {{site.name.en}}
 
