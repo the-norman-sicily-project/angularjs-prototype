@@ -4,7 +4,5 @@ div(id="video-modal-{{id}}" click-outside="cancel()")
     div.modal-body
         div.media
             video(style="width:100%;height:100%;" controls autoplay ng-src="{{videoController.videoSource}}")
-
-        pre(src="{{videoController.videoSource}}")
     div.modal-footer
         button.btn.btn-primary(type="button" ng-click="videoController.close()") Close
