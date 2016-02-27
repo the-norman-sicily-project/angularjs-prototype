@@ -5,12 +5,12 @@ class SiteController {
     this.carouselInterval = 3000;
     this.siteData = siteData;
     this.modal = $uibModal;
+    this.scope = $scope;
+  }
 
-    $scope.$on('mapInitialized', function(event, map) {
-      if (google) {
-        google.maps.event.trigger(map, 'resize');
-      }
-    });
+  mapInitialized(map) {
+    this.map = map;
+    this.scope.apply();
   }
 
   videoClick(videoUrl, videoTitle) {

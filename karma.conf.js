@@ -26,8 +26,8 @@ module.exports = function(config) {
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/lodash/lodash.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
-      'client/bower_components/ngmap/build/scripts/ng-map.js',
       'client/bower_components/angular-animate/angular-animate.js',
+      'client/bower_components/ngmap/build/scripts/ng-map.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',

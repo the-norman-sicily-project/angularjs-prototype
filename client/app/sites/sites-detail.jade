@@ -40,7 +40,7 @@
                         div.site-detail-data {{site.siteData.extantRemains === true ? 'Yes (may not date to the Norman period)' : 'No'}}
                 .row(ng-show='site.siteData.location && site.siteData.location.latitude && site.siteData.location.longitude')
                     div.col-lg-12
-                        ng-map(center='[{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}]' zoom='10' default-style='true')
+                        ng-map(center='[{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}]' map-initialized='mapInitialized(map)' zoom='10' default-style='true')
                             marker(id='{{site.siteData._id}}' position='{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}' on-click="map.showInfoWindow(event, '{{site._id}}-info')")
                             info-window(id='{{site.siteData._id}}-info', visible-on-marker='{{site.siteData._id}}')
                                 div(ng-non-bindable='')
