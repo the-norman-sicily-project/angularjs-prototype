@@ -72,6 +72,27 @@ SiteSchema
   });
 
 SiteSchema
+  .virtual('documents')
+  .get(function() {
+    var documents = [];
+    // documents are assumed to be kept in a single directory per site with no
+    // subdirectories. Only video files will be kept in these directories
+    // (no listing files, etc.)
+    var siteDocumentsPath = __dirname + "/../../media/documents/sites/" + this._id.toString();
+    var siteDocumentTitle = this.name.en;
+    try {
+      fs.statSync(siteDocumentsPath);
+      var files = fs.readdirSync(siteDocumentsPath);
+      documents = files.map(function(file) {
+       return {filename: file, title: siteDocumentTitle};
+      });
+    } catch(err) {
+      console.log('Directory ' + siteDocumentsPath + ' does not exist!');
+    }
+    return documents;
+  });
+
+SiteSchema
   .virtual('tooltipText')
   .get(function(){
     var tooltipElements = [];

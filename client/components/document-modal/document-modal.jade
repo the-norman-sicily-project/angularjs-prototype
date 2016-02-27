@@ -1,0 +1,11 @@
+div(id="document-modal-{{id}}" click-outside="cancel()")
+    div.modal-header
+        h3.modal-title {{documentController.title}}
+    div.modal-body
+      div.media
+        iframe(src='{{documentController.documentSource}}'
+style='width:600px; height:500px;' frameborder='0')
+
+        pre(src='{{documentController.documentSource}}')
+    div.modal-footer
+        button.btn.btn-primary(type='button' ng-click='documentController.close()') Close

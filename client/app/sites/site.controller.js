@@ -14,8 +14,7 @@ class SiteController {
   }
 
   videoClick(videoUrl, videoTitle) {
-    console.log(videoUrl);
-    this.modalInstance = this.modal.open({
+    this.videoModalInstance = this.modal.open({
       animation: this.animationsEnabled,
       templateUrl: 'components/video-modal/video-modal.html',
       controller: 'VideoController',
@@ -28,6 +27,22 @@ class SiteController {
         },
         videoTitle: function() {
           return videoTitle;
+        }
+      }
+    });
+  }
+
+  documentClick(documentUrl, documentTitle) {
+    this.documentModalInstance = this.modal.open({
+      templateUrl: 'components/document-modal/document-modal.html',
+      controller: 'DocumentController',
+      controllerAs: 'documentController',
+      resolve: {
+        documentUrl: function() {
+          return documentUrl;
+        },
+        documentTitle: function() {
+          return documentTitle;
         }
       }
     });
