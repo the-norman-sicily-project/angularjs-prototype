@@ -42,12 +42,33 @@ SiteSchema
       fs.statSync(siteImagesPath);
       var files = fs.readdirSync(siteImagesPath);
       slides = files.map(function(file) {
-       return {filename: file}; 
+       return {filename: file};
       });
     } catch(err) {
       console.log('Directory ' + siteImagesPath + ' does not exist!');
     }
     return slides;
+  });
+
+SiteSchema
+  .virtual('videos')
+  .get(function() {
+    var videos = [];
+    // videos are assumed to be kept in a single directory per site with no
+    // subdirectories. Only video files will be kept in these directories
+    // (no listing files, etc.)
+    var siteVideosPath = __dirname + "/../../media/videos/sites/" + this._id.toString();
+    var siteVideoTitle = this.name.en;
+    try {
+      fs.statSync(siteVideosPath);
+      var files = fs.readdirSync(siteVideosPath);
+      videos = files.map(function(file) {
+       return {filename: file, title: siteVideoTitle};
+      });
+    } catch(err) {
+      console.log('Directory ' + siteVideosPath + ' does not exist!');
+    }
+    return videos;
   });
 
 SiteSchema

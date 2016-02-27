@@ -6,6 +6,11 @@
                     p.site-detail-title {{site.siteData.name.en}}
                     p.site-detail-location {{site.siteData.location.approximate}}, Province of {{site.siteData.location.modernProvince}}
                     div(ng-show='site.siteData.datesVisited') #[p.site-detail-date #[span(ng-repeat='dateVisited in site.siteData.datesVisited') {{dateVisited | asDate | date : 'MMM yyyy' }}{{$last ? '' : ($index===sites.datesVisited.length-2) ? ' and ' : ', '}}]]
+            .row(ng-show='site.siteData.videos && site.siteData.videos.length > 0')
+                .col-lg-12
+                    div.pull-right
+                        a(href='#' ng-repeat='video in site.siteData.videos' ng-click="site.videoClick('/media/videos/sites/' + site.siteData._id + '/' + video.filename, video.title)")
+                            img(ng-src='/assets/images/video.png')
             .row(ng-show='site.siteData.slides && site.siteData.slides.length > 0')
                 .col-lg-12
                     div.inner
