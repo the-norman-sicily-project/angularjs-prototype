@@ -60,8 +60,8 @@ describe('Sites route test', function() {
             expect(state.name).to.equal(stateName);
             expect(state.abstract).to.be.truthy;
             expect(state.url).to.equal('/sites');
-            expect(state.controller).to.equal('SitesController');
-            expect(state.templateUrl).to.equal('app/sites/sites.html');
+            expect(state.views[''].controller).to.equal('SitesController');
+            expect(state.views[''].templateUrl).to.equal('app/sites/sites.html');
             expect(state.resolve.sitesData).to.be.defined;
             expect(state.resolve.sitesByTypes).to.be.defined;
         });
@@ -109,8 +109,8 @@ describe('Sites route test', function() {
             expect(state.name).to.equal(stateName);
             expect(state.abstract).to.be.falsy;
             expect(state.url).to.equal('');
-            expect(state.controller).to.be.undefined;
-            expect(state.templateUrl).to.equal('app/sites/sites-list.html');
+            expect(state.views[''].controller).to.be.undefined;
+            expect(state.views[''].templateUrl).to.equal('app/sites/sites-list.html');
         });
     });
 

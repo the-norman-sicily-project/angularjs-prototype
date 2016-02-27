@@ -6,9 +6,13 @@ angular.module('siciliaNormannaApp')
       .state('sites', {
         abstract: true,
         url: '/sites',
-        templateUrl: 'app/sites/sites.html',
-        controller: 'SitesController',
-        controllerAs: 'sites',
+        views: {
+          '': {
+            templateUrl: 'app/sites/sites.html',
+            controller: 'SitesController',
+            controllerAs: 'sites'
+          }
+        },
         resolve: {
             sitesData: function(SiteService) {
                 return SiteService.getSites();
@@ -23,7 +27,11 @@ angular.module('siciliaNormannaApp')
       })
       .state('sites.list', {
         url: '',
-        templateUrl: 'app/sites/sites-list.html',
+        views: {
+          '': {
+            templateUrl: 'app/sites/sites-list.html'
+          }
+        },
         onEnter: function() {
             console.log('enter sites list');
         }
