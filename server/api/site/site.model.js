@@ -42,10 +42,12 @@ SiteSchema
       fs.statSync(siteImagesPath);
       var files = fs.readdirSync(siteImagesPath);
       slides = files.map(function(file) {
-       return {filename: file};
+        if (file !== '.DS_Store') {
+          return {filename: file};
+        }
       });
     } catch(err) {
-      console.log('Directory ' + siteImagesPath + ' does not exist!');
+      //console.log('Directory ' + siteImagesPath + ' does not exist!');
     }
     return slides;
   });
@@ -63,11 +65,18 @@ SiteSchema
       fs.statSync(siteVideosPath);
       var files = fs.readdirSync(siteVideosPath);
       videos = files.map(function(file) {
-       return {filename: file, title: siteVideoTitle};
+        if (file !== '.DS_Store') {
+          return {filename: file, title: siteVideoTitle};
+        }
       });
     } catch(err) {
-      console.log('Directory ' + siteVideosPath + ' does not exist!');
+      //console.log('Directory ' + siteVideosPath + ' does not exist!');
     }
+
+    if (videos.length > 0) {
+      videos = videos.filter(function(video) { return video !== undefined; } );
+    }
+
     return videos;
   });
 
@@ -84,11 +93,18 @@ SiteSchema
       fs.statSync(siteDocumentsPath);
       var files = fs.readdirSync(siteDocumentsPath);
       documents = files.map(function(file) {
-       return {filename: file, title: siteDocumentTitle};
+        if (file !== '.DS_Store') {
+          return {filename: file, title: siteDocumentTitle};
+        }
       });
     } catch(err) {
-      console.log('Directory ' + siteDocumentsPath + ' does not exist!');
+      //console.log('Directory ' + siteDocumentsPath + ' does not exist!');
     }
+
+    if (documents.length > 0) {
+      documents = documents.filter(function(document) { return document !== undefined; } );
+    }
+
     return documents;
   });
 
