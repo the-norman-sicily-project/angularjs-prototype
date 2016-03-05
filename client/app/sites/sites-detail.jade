@@ -24,30 +24,33 @@
                             img(ng-src='/assets/images/pdf.png')
 
         .col-lg-6
-            div.inner
-                <div ui-view='details-monastery' ng-show="site.siteData.type==='monastery'" />
-                <div ui-view='details-fortification' ng-show="site.siteData.type==='fortification'" />
-
-                .row(ng-show='site.siteData.name.variations.length > 0')
-                    div.col-lg-6
-                        div.site-detail-label Known Spelling Variations:
-                    div.col-lg-6
-                        div.site-detail-data  #[span(ng-repeat='variation in site.siteData.name.variations') {{variation}}{{$last ? '' : ($index===sites.name.variations.length-2) ? ' and ' : ', '}}]
-                .row(ng-show='site.siteData.extantRemains')
-                    div.col-lg-6
-                        div.site-detail-label Any extant remains on site:
-                    div.col-lg-6
-                        div.site-detail-data {{site.siteData.extantRemains === true ? 'Yes (may not date to the Norman period)' : 'No'}}
-                .row(ng-show='site.siteData.location && site.siteData.location.latitude && site.siteData.location.longitude')
-                    div.col-lg-12
-                        ng-map(center='[{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}]' map-initialized='mapInitialized(map)' zoom='10' default-style='true')
-                            marker(id='{{site.siteData._id}}' position='{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}' on-click="map.showInfoWindow(event, '{{site._id}}-info')")
-                            info-window(id='{{site.siteData._id}}-info', visible-on-marker='{{site.siteData._id}}')
-                                div(ng-non-bindable='')
-                                    div(id='siteNotice')
-                                        div.site-detail-location.bold(id='locationHeading') {{site.siteData.name.en}}
-                                        div.site-detial-location(id='locationContent' style='text-transform: capitalize') {{site.siteData.type}}
-                    div.col-lg-12
-                        div.text-center
-                            div.site-detail-label {{site.siteData.location.isExact === true ? '' : 'Approximate '}} Coordinates: {{site.siteData.location.latitude}} (latitude), {{site.siteData.location.longitude}} (longitude)
-
+            .row
+                .col-lg-12
+                    div.inner
+                        .row
+                            .col-lg-12
+                                <div ui-view='details-monastery' ng-show="site.siteData.type==='monastery'" />
+                                <div ui-view='details-fortification' ng-show="site.siteData.type==='fortification'" />
+                        .row(ng-show='site.siteData.name.variations.length > 0')
+                            .col-lg-6
+                                div.site-detail-label Known Spelling Variations:
+                            .col-lg-6
+                                div.site-detail-data  #[span(ng-repeat='variation in site.siteData.name.variations') {{variation}}{{$last ? '' : ($index===sites.name.variations.length-2) ? ' and ' : ', '}}]
+                        .row(ng-show='site.siteData.extantRemains')
+                            .col-lg-6
+                                div.site-detail-label Any extant remains on site:
+                            .col-lg-6
+                                div.site-detail-data {{site.siteData.extantRemains === true ? 'Yes (may not date to the Norman period)' : 'No'}}
+                        .row(ng-show='site.siteData.location && site.siteData.location.latitude && site.siteData.location.longitude')
+                            .col-lg-12
+                                ng-map(center='[{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}]' map-initialized='mapInitialized(map)' zoom='10' default-style='true')
+                                    marker(id='{{site.siteData._id}}' position='{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}' on-click="map.showInfoWindow(event, '{{site._id}}-info')")
+                                    info-window(id='{{site.siteData._id}}-info', visible-on-marker='{{site.siteData._id}}')
+                                        div(ng-non-bindable='')
+                                            div(id='siteNotice')
+                                                div.site-detail-location.bold(id='locationHeading') {{site.siteData.name.en}}
+                                                div.site-detial-location(id='locationContent' style='text-transform: capitalize') {{site.siteData.type}}
+                        div.col-lg-12
+                            .col-lg-12
+                                div.text-center
+                                    div.site-detail-label {{site.siteData.location.isExact === true ? '' : 'Approximate '}} Coordinates: {{site.siteData.location.latitude}} (latitude), {{site.siteData.location.longitude}} (longitude)

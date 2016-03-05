@@ -7,7 +7,7 @@ angular.module('siciliaNormannaApp')
         abstract: true,
         url: '/sites',
         views: {
-          '': {
+          '@': {
             templateUrl: 'app/sites/sites.html',
             controller: 'SitesController',
             controllerAs: 'sites'
@@ -28,7 +28,7 @@ angular.module('siciliaNormannaApp')
       .state('sites.list', {
         url: '',
         views: {
-          '': {
+          '@sites': {
             templateUrl: 'app/sites/sites-list.html'
           }
         },
@@ -39,7 +39,7 @@ angular.module('siciliaNormannaApp')
       .state('sites.detail', {
         url: '/:id',
         views: {
-            '': {
+            '@sites': {
                 templateUrl: 'app/sites/sites-detail.html',
                 controller: 'SiteController',
                 controllerAs: 'site'

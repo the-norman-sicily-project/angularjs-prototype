@@ -60,8 +60,8 @@ describe('Sites route test', function() {
             expect(state.name).to.equal(stateName);
             expect(state.abstract).to.be.truthy;
             expect(state.url).to.equal('/sites');
-            expect(state.views[''].controller).to.equal('SitesController');
-            expect(state.views[''].templateUrl).to.equal('app/sites/sites.html');
+            expect(state.views['@'].controller).to.equal('SitesController');
+            expect(state.views['@'].templateUrl).to.equal('app/sites/sites.html');
             expect(state.resolve.sitesData).to.be.defined;
             expect(state.resolve.sitesByTypes).to.be.defined;
         });
@@ -109,8 +109,8 @@ describe('Sites route test', function() {
             expect(state.name).to.equal(stateName);
             expect(state.abstract).to.be.falsy;
             expect(state.url).to.equal('');
-            expect(state.views[''].controller).to.be.undefined;
-            expect(state.views[''].templateUrl).to.equal('app/sites/sites-list.html');
+            expect(state.views['@sites'].controller).to.be.undefined;
+            expect(state.views['@sites'].templateUrl).to.equal('app/sites/sites-list.html');
         });
     });
 
@@ -126,8 +126,8 @@ describe('Sites route test', function() {
             expect(state.name).to.equal(stateName);
             expect(state.abstract).to.be.falsy;
             expect(state.url).to.equal('/:id');
-            expect(state.views[''].controller).to.equal('SiteController');
-            expect(state.views[''].templateUrl).to.equal('app/sites/sites-detail.html');
+            expect(state.views['@sites'].controller).to.equal('SiteController');
+            expect(state.views['@sites'].templateUrl).to.equal('app/sites/sites-detail.html');
             expect(state.views['details-monastery@sites.detail'].templateUrl).to.equal('app/sites/sites-details-monastery.html');
             expect(state.views['details-fortification@sites.detail'].templateUrl).to.equal('app/sites/sites-details-fortification.html');
             expect(state.resolve.siteData).to.be.defined;
