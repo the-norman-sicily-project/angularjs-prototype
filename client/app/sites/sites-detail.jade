@@ -47,10 +47,10 @@
                                     marker(id='{{site.siteData._id}}' position='{{site.siteData.location.latitude}},{{site.siteData.location.longitude}}' on-click="map.showInfoWindow(event, '{{site._id}}-info')")
                                     info-window(id='{{site.siteData._id}}-info', visible-on-marker='{{site.siteData._id}}')
                                         div(ng-non-bindable='')
-                                            div(id='siteNotice')
-                                                div.site-detail-location.bold(id='locationHeading') {{site.siteData.name.en}}
-                                                div.site-detial-location(id='locationContent' style='text-transform: capitalize') {{site.siteData.type}}
-                        div.col-lg-12
+                                            div.site-detail-location(id='locationHeading') {{site.siteData.name.en}}
+                                            div.site-detail-location-content(id='locationContent' style='text-transform: capitalize') {{site.siteData.type}}
+                        .row
                             .col-lg-12
                                 div.text-center
                                     div.site-detail-label {{site.siteData.location.isExact === true ? '' : 'Approximate '}} Coordinates: {{site.siteData.location.latitude}} (latitude), {{site.siteData.location.longitude}} (longitude)
+
