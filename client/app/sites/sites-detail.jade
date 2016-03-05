@@ -38,7 +38,7 @@
                                 div.site-detail-data  #[span(ng-repeat='variation in site.siteData.name.variations') {{variation}}{{$last ? '' : ($index===sites.name.variations.length-2) ? ' and ' : ', '}}]
                         .row(ng-show='site.siteData.extantRemains')
                             .col-lg-6
-                                div.site-detail-label Any extant remains on site:
+                                div.site-detail-label Any Extant Remains on Site:
                             .col-lg-6
                                 div.site-detail-data {{site.siteData.extantRemains === true ? 'Yes (may not date to the Norman period)' : 'No'}}
                         .row(ng-show='site.siteData.location && site.siteData.location.latitude && site.siteData.location.longitude')
