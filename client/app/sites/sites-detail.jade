@@ -10,7 +10,7 @@
                 .col-lg-12
                     div.pull-right
                         a(href='#' ng-repeat='video in site.siteData.videos' ng-click="site.videoClick('/media/videos/sites/' + site.siteData._id + '/' + video.filename, video.title)")
-                            img(ng-src='/assets/images/movie_camera_50x50.png')
+                            img.bottom-padding(ng-src='/assets/images/movie_camera_50x50.png')
             .row(ng-show='site.siteData.slides && site.siteData.slides.length > 0')
                 .col-lg-12
                     div.inner
@@ -21,7 +21,7 @@
                 .col-lg-12
                     div.pull-right
                         a(href='#' ng-repeat='document in site.siteData.documents' ng-click="site.documentClick('/media/documents/sites/' + site.siteData._id + '/' + document.filename, document.title)")
-                            img(ng-src='/assets/images/pdf_50x50.png')
+                            img.top-padding(ng-src='/assets/images/pdf_50x50.png')
 
         .col-lg-6
             .row
