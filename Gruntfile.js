@@ -18,7 +18,8 @@ module.exports = function (grunt) {
     protractor: 'grunt-protractor-runner',
     buildcontrol: 'grunt-build-control',
     istanbul_check_coverage: 'grunt-mocha-istanbul',
-    ngconstant: 'grunt-ng-constant'
+    ngconstant: 'grunt-ng-constant',
+    mongoimport: 'grunt-mongoimport'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -29,6 +30,21 @@ module.exports = function (grunt) {
 
     // Project settings
     pkg: grunt.file.readJSON('package.json'),
+    mongoimport: {
+      options: {
+        db: 'sicilianormanna' + '-' + (process.env.NODE_ENV || 'dev'),
+        host: 'localhost',
+        port: '27017',
+        collections: [
+          {
+            name: 'sites',
+            type: 'json',
+            file: 'data/sites.json',
+            drop: true
+          }
+        ]
+      }
+    },
     yeoman: {
       // configurable paths
       client: require('./bower.json').appPath || 'client',
@@ -834,7 +850,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'filerev',
-    'usemin'
+    'usemin',
+    'mongoimport'
   ]);
 
   grunt.registerTask('default', [
