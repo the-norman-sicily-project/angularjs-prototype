@@ -28,11 +28,12 @@ var config = {
   // ----- Capabilities to be passed to the webdriver instance ----
   //
   // For a full list of available capabilities, see
-  // https://code.google.com/p/selenium/wiki/DesiredCapabilities
+  // https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
   // and
-  // https://code.google.com/p/selenium/source/browse/javascript/webdriver/capabilities.js
+  // https://github.com/SeleniumHQ/selenium/blob/master/javascript/webdriver/capabilities.js
   capabilities: {
-    'browserName': 'chrome',
+    'browserName': 'phantomjs',
+    "phantomjs.binary.path": require("phantomjs").path,
     'name': 'Fullstack E2E',
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
     'build': process.env.TRAVIS_BUILD_NUMBER
