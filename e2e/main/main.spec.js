@@ -12,8 +12,8 @@ describe('Main View', function() {
   });
 
   it('should include jumbotron with correct data', function() {
-    expect(page.h1El.getText()).to.eventually.equal('\'Allo, \'Allo!');
-    expect(page.imgEl.getAttribute('src')).to.eventually.match(/yeoman.png$/);
-    expect(page.imgEl.getAttribute('alt')).to.eventually.equal('I\'m Yeoman');
+    expect(page.h1El.getText()).to.eventually.equal('The Norman Sicily Project');
+    expect(page.h2El.getText()).to.eventually.equal('Envisioning the Norman State in Southern Italy, c. 1061 - 1194');
+    expect(page.imgEl.getAttribute('src')).to.eventually.match(/idrisi_map.png$/);
   });
 });

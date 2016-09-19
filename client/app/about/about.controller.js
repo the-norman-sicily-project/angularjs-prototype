@@ -2,11 +2,11 @@
 
 class AboutController {
   constructor() {
-    this.messsage = 'Hello';
+    this.message = 'Hello';
   }
 }
 
 angular.module('siciliaNormannaApp')
-  .controller('AboutController', function() {
+  .controller('AboutController', [function() {
     return new AboutController();
-  });
+  }]);

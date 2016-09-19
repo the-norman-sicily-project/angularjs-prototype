@@ -33,7 +33,7 @@ var config = {
   // https://github.com/SeleniumHQ/selenium/blob/master/javascript/webdriver/capabilities.js
   capabilities: {
     'browserName': 'phantomjs',
-    "phantomjs.binary.path": require("phantomjs").path,
+    "phantomjs.binary.path": require("phantomjs-prebuilt").path,
     'name': 'Fullstack E2E',
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
     'build': process.env.TRAVIS_BUILD_NUMBER

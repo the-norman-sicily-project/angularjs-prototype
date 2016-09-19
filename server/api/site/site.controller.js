@@ -42,11 +42,11 @@ function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
     return updated.saveAsync()
-      .spread(function(updated) {
-          console.log(updated);
-        return updated;
+      .spread(function(update) {
+        console.log(update);
+        return update;
       })
-      .catch(function(err){
+      .catch(function(err) {
         console.log(err);
       });
   };
@@ -88,7 +88,7 @@ exports.create = function(req, res) {
 // Updates an existing Site in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
-    delete req.body._id;
+    Reflect.deleteProperty(req.body, '_id');
   }
   Site.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))

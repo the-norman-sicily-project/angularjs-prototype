@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-  .factory('Modal', function ($rootScope, $modal) {
+  .factory('Modal', function($rootScope, $modal) {
     /**
      * Opens a modal
      * @param  {Object} scope      - an object to be merged with modal's scope
@@ -38,25 +38,25 @@ angular.module('siciliaNormannaApp')
            * @param  {All}           - any additional args are passed straight to del callback
            */
           return function() {
-            var args = Array.prototype.slice.call(arguments),
-                name = args.shift(),
-                deleteModal;
+            var args = Reflect.apply(Array.prototype.slice, ...args, []),
+              name = args.shift(),
+              deleteModal;
 
             deleteModal = openModal({
               modal: {
                 dismissable: true,
                 title: 'Confirm Delete',
-                html: '<p>Are you sure you want to delete <strong>' + name + '</strong> ?</p>',
+                html: `<p>Are you sure you want to delete <strong>${name}</strong> ?</p>`,
                 buttons: [{
                   classes: 'btn-danger',
                   text: 'Delete',
-                  click: function(e) {
+                  click(e) {
                     deleteModal.close(e);
                   }
                 }, {
                   classes: 'btn-default',
                   text: 'Cancel',
-                  click: function(e) {
+                  click(e) {
                     deleteModal.dismiss(e);
                   }
                 }]
@@ -64,7 +64,7 @@ angular.module('siciliaNormannaApp')
             }, 'modal-danger');
 
             deleteModal.result.then(function(event) {
-              del.apply(event, args);
+              Reflect.apply(del, event, args);
             });
           };
         }

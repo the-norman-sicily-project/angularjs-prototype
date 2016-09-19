@@ -19,8 +19,8 @@ module.exports = function (grunt) {
     buildcontrol: 'grunt-build-control',
     istanbul_check_coverage: 'grunt-mocha-istanbul',
     ngconstant: 'grunt-ng-constant',
-    mongoimport: 'grunt-mongoimport'
-  });
+    jsbeautifier: 'grunt-jsbeautifier'
+  })
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
@@ -30,21 +30,6 @@ module.exports = function (grunt) {
 
     // Project settings
     pkg: grunt.file.readJSON('package.json'),
-    mongoimport: {
-      options: {
-        db: 'sicilianormanna' + '-' + (process.env.NODE_ENV || 'dev'),
-        host: 'localhost',
-        port: '27017',
-        collections: [
-          {
-            name: 'sites',
-            type: 'json',
-            file: 'data/sites.json',
-            drop: true
-          }
-        ]
-      }
-    },
     yeoman: {
       // configurable paths
       client: require('./bower.json').appPath || 'client',
@@ -79,7 +64,7 @@ module.exports = function (grunt) {
       },
       ngconstant: {
         files: ['<%= yeoman.server %>/config/environment/shared.js'],
-        tasks: ['ngconstant']
+        tasks: ['ngconstant', 'jsbeautifier']
       },
       injectJS: {
         files: [
@@ -98,7 +83,7 @@ module.exports = function (grunt) {
       },
       jsTest: {
         files: ['<%= yeoman.client %>/{app,components}/**/*.{spec,mock}.js'],
-        tasks: ['newer:jshint:all', 'wiredep:test', 'karma']
+        tasks: ['wiredep:test', 'karma']
       },
       injectLess: {
         files: ['<%= yeoman.client %>/{app,components}/**/*.less'],
@@ -139,44 +124,6 @@ module.exports = function (grunt) {
       },
     },
 
-    // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '<%= yeoman.client %>/.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      server: {
-        options: {
-          jshintrc: '<%= yeoman.server %>/.jshintrc'
-        },
-        src: ['<%= yeoman.server %>/**/!(*.spec|*.integration).js']
-      },
-      serverTest: {
-        options: {
-          jshintrc: '<%= yeoman.server %>/.jshintrc-spec'
-        },
-        src: ['<%= yeoman.server %>/**/*.{spec,integration}.js']
-      },
-      all: ['<%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock).js'],
-      test: {
-        src: ['<%= yeoman.client %>/{app,components}/**/*.{spec,mock}.js']
-      }
-    },
-
-    jscs: {
-      options: {
-        config: ".jscsrc"
-      },
-      main: {
-        files: {
-          src: [
-            '<%= yeoman.client %>/app/**/*.js',
-            '<%= yeoman.server %>/**/*.js'
-          ]
-        }
-      }
-    },
-
     // Empties folders to start fresh
     clean: {
       dist: {
@@ -213,8 +160,8 @@ module.exports = function (grunt) {
     'node-inspector': {
       custom: {
         options: {
-          'preload': false,
-          'web-host': 'localhost'
+          preload: false,
+          hidden: ['node_modules']
         }
       }
     },
@@ -339,7 +286,7 @@ module.exports = function (grunt) {
         name: 'siciliaNormannaApp.constants',
         dest: '<%= yeoman.client %>/app/app.constant.js',
         deps: [],
-        wrap: true,
+        wrap: '((function(angular) {\n  \'use strict\';\n{%= __ngModule %}\n})(angular));',
         configPath: '<%= yeoman.server %>/config/environment/shared'
       },
       app: {
@@ -347,6 +294,32 @@ module.exports = function (grunt) {
           return {
             appConfig: require('./' + grunt.config.get('ngconstant.options.configPath'))
           };
+        }
+      }
+    },
+
+    jsbeautifier: {
+      files: ['<%= yeoman.client %>/app/app.constant.js'],
+      options: {
+        js: {
+          braceStyle: 'collapse',
+          breakChainedMethods: false,
+          e4x: false,
+          evalCode: false,
+          indentChar: ' ',
+          indentLevel: 0,
+          indentSize: 2,
+          indentWithTabs: false,
+          jslintHappy: false,
+          keepArrayIndentation: false,
+          keepFunctionIndentation: false,
+          maxPreserveNewlines: 10,
+          preserveNewlines: false,
+          spaceBeforeConditional: true,
+          spaceInParen: false,
+          unescapeStrings: false,
+          wrapLineLength: 0,
+          endWithNewline: true
         }
       }
     },
@@ -450,7 +423,8 @@ module.exports = function (grunt) {
     concurrent: {
       pre: [
         'injector:less',
-        'ngconstant'
+        'ngconstant',
+        'jsbeautifier'
       ],
       server: [
         'newer:babel:client',
@@ -541,7 +515,9 @@ module.exports = function (grunt) {
     protractor: {
       options: {
         configFile: 'protractor.conf.js'
-      }
+      },
+      all: {
+      },
     },
 
     env: {
@@ -843,12 +819,10 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'filerev',
-    'usemin',
-    'mongoimport'
+    'usemin'
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
     'test',
     'build'
   ]);

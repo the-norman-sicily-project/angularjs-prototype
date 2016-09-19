@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-  .directive('footer', function () {
+  .directive('footer', function() {
     return {
       templateUrl: 'components/footer/footer.html',
       restrict: 'E',
-      link: function(scope, element) {
+      link(scope, element) {
         element.addClass('footer');
       }
     };

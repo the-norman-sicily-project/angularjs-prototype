@@ -20,10 +20,10 @@ class SiteController {
       backdrop: true,
       size: 'lg',
       resolve: {
-        videoUrl: function() {
+        videoUrl() {
           return videoUrl;
         },
-        videoTitle: function() {
+        videoTitle() {
           return videoTitle;
         }
       }
@@ -36,10 +36,10 @@ class SiteController {
       controller: 'DocumentController',
       controllerAs: 'documentController',
       resolve: {
-        documentUrl: function() {
+        documentUrl() {
           return documentUrl;
         },
-        documentTitle: function() {
+        documentTitle() {
           return documentTitle;
         }
       }

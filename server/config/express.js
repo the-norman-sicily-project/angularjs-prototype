@@ -7,7 +7,6 @@
 import express from 'express';
 import favicon from 'serve-favicon';
 import morgan from 'morgan';
-import compression from 'compression';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
@@ -18,14 +17,15 @@ import config from './environment';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
+import shrinkRay from 'shrink-ray';
 var MongoStore = connectMongo(session);
 
 export default function(app) {
   var env = app.get('env');
 
-  app.set('views', config.root + '/server/views');
+  app.set('views', `${config.root}/server/views`);
   app.set('view engine', 'jade');
-  app.use(compression());
+  app.use(shrinkRay());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(methodOverride());
@@ -48,7 +48,7 @@ export default function(app) {
    * Lusca - express server security
    * https://github.com/krakenjs/lusca
    */
-  if ('test' !== env) {
+  if (env !== 'test') {
     app.use(lusca({
       csrf: {
         angular: true
@@ -66,17 +66,17 @@ export default function(app) {
   app.set('appPath', path.join(config.root, 'client'));
   app.use('/media', express.static(path.join(config.root, 'server/media')));
 
-  if ('production' === env) {
+  if (env === 'production') {
     app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));
     app.use(express.static(app.get('appPath')));
     app.use(morgan('dev'));
   }
 
-  if ('development' === env) {
+  if (env === 'development') {
     app.use(require('connect-livereload')());
   }
 
-  if ('development' === env || 'test' === env) {
+  if (env === 'development' || env === 'test') {
     app.use(express.static(path.join(config.root, '.tmp')));
     app.use(express.static(app.get('appPath')));
     app.use(morgan('dev'));

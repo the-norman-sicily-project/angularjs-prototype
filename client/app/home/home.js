@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-  .config(function ($stateProvider) {
+  .config(function($stateProvider) {
     $stateProvider
       .state('home', {
         url: '/',

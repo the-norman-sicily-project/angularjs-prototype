@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-  .config(function ($stateProvider) {
+  .config(function($stateProvider) {
     $stateProvider
       .state('about', {
         url: '/about',
         templateUrl: 'app/about/about.html',
         controller: 'AboutController',
-        onEnter: function() {
+        onEnter() {
           console.log('enter about');
         }
       });

@@ -13,8 +13,8 @@ SiteEvents.setMaxListeners(0);
 
 // Model events
 var events = {
-  'save': 'save',
-  'remove': 'remove'
+  save: 'save',
+  remove: 'remove'
 };
 
 // Register the event emitter to the model events
@@ -23,11 +23,11 @@ for (var e in events) {
   Site.schema.post(e, emitEvent(event));
 }
 
-function emitEvent(event) {
+function emitEvent(eventToEmit) {
   return function(doc) {
-    SiteEvents.emit(event + ':' + doc._id, doc);
-    SiteEvents.emit(event, doc);
-  }
+    SiteEvents.emit(`${eventToEmit}:${doc._id}`, doc);
+    SiteEvents.emit(eventToEmit, doc);
+  };
 }
 
 module.exports = SiteEvents;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-  .config(function ($stateProvider) {
+  .config(function($stateProvider) {
     $stateProvider
       .state('sites', {
         abstract: true,
@@ -14,15 +14,15 @@ angular.module('siciliaNormannaApp')
           }
         },
         resolve: {
-            sitesData: function(SiteService) {
-                return SiteService.getSites();
-            },
-            sitesByTypes: function(sitesData) {
-                return _.groupBy(_.sortBy(sitesData, 'name.en'), 'type');
-            }
+          sitesData(SiteService) {
+            return SiteService.getSites();
+          },
+          sitesByTypes(sitesData) {
+            return _.groupBy(_.sortBy(sitesData, 'name.en'), 'type');
+          }
         },
-        onEnter: function() {
-            console.log('enter sites');
+        onEnter() {
+          console.log('enter sites');
         }
       })
       .state('sites.list', {
@@ -32,32 +32,32 @@ angular.module('siciliaNormannaApp')
             templateUrl: 'app/sites/sites-list.html'
           }
         },
-        onEnter: function() {
-            console.log('enter sites list');
+        onEnter() {
+          console.log('enter sites list');
         }
       })
       .state('sites.detail', {
         url: '/:id',
         views: {
-            '@sites': {
-                templateUrl: 'app/sites/sites-detail.html',
-                controller: 'SiteController',
-                controllerAs: 'site'
-            },
-            'details-monastery@sites.detail': {
-                templateUrl: 'app/sites/sites-details-monastery.html'
-            },
-            'details-fortification@sites.detail': {
-                templateUrl: 'app/sites/sites-details-fortification.html'
-            }
+          '@sites': {
+            templateUrl: 'app/sites/sites-detail.html',
+            controller: 'SiteController',
+            controllerAs: 'site'
+          },
+          'details-monastery@sites.detail': {
+            templateUrl: 'app/sites/sites-details-monastery.html'
+          },
+          'details-fortification@sites.detail': {
+            templateUrl: 'app/sites/sites-details-fortification.html'
+          }
         },
         resolve: {
-            siteData: function(SiteService, $stateParams) {
-                return SiteService.getSite($stateParams.id);
-            }
+          siteData(SiteService, $stateParams) {
+            return SiteService.getSite($stateParams.id);
+          }
         },
-        onEnter: function(){
-            console.log('enter sites detail');
+        onEnter() {
+          console.log('enter sites detail');
         }
-        });
-    });
+      });
+  });

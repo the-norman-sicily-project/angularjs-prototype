@@ -7,6 +7,6 @@ class HomeController {
 }
 
 angular.module('siciliaNormannaApp')
-  .controller('HomeController', ['$scope', '$sce', function ($scope, $sce) {
+  .controller('HomeController', ['$scope', '$sce', function($scope, $sce) {
     return new HomeController($scope, $sce);
   }]);

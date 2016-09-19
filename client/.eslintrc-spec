@@ -1,0 +1,10 @@
+{
+  "extends": "../.eslintrc",
+  "globals": {
+    "describe": true,
+    "beforeEach": true,
+    "expect": true,
+    "it": true,
+    "inject": true
+  }
+}

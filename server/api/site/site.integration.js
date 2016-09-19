@@ -6,7 +6,6 @@ var request = require('supertest');
 var newSite;
 
 describe('Site API:', function() {
-
   describe('GET /api/sites', function() {
     var sites;
 
@@ -27,33 +26,32 @@ describe('Site API:', function() {
     it('should respond with JSON array', function() {
       expect(sites).to.be.instanceOf(Array);
     });
-
   });
 
   describe('POST /api/sites', function() {
-      beforeEach(function(done) {
-        var site = {
-            name: {
-                en: 'New Site One',
-                it: 'Nuovo Sito Uno',
-                variations: ['another variant'],
-            },
-            location: {
-                approximate: 'Taormina',
-                elevation: null,
-                isExact: false,
-                latitude: 45.95,
-                longitude: 12.33,
-                modernProvince: 'Messina'
-            },
-            bibliography: 'Some book',
-            notes: 'This is the swanky site!!!',
-            extantRemains: true,
-            primarySourceQuotation: 'a quote',
-            type: 'a type',
-            datesVisited: ['10-09-2014'],
-            details: []
-        };
+    beforeEach(function(done) {
+      var site = {
+        name: {
+          en: 'New Site One',
+          it: 'Nuovo Sito Uno',
+          variations: ['another variant'],
+        },
+        location: {
+          approximate: 'Taormina',
+          elevation: null,
+          isExact: false,
+          latitude: 45.95,
+          longitude: 12.33,
+          modernProvince: 'Messina'
+        },
+        bibliography: 'Some book',
+        notes: 'This is the swanky site!!!',
+        extantRemains: true,
+        primarySourceQuotation: 'a quote',
+        type: 'a type',
+        datesVisited: ['10-09-2014'],
+        details: []
+      };
 
       request(app)
         .post('/api/sites')
@@ -87,7 +85,7 @@ describe('Site API:', function() {
 
     beforeEach(function(done) {
       request(app)
-        .get('/api/sites/' + newSite._id)
+        .get(`/api/sites/${newSite._id}`)
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
@@ -107,7 +105,6 @@ describe('Site API:', function() {
       expect(site.name.en).to.equal('New Site One');
       expect(site.notes).to.equal('This is the swanky site!!!');
     });
-
   });
 
   describe('PUT /api/sites/:id', function() {
@@ -115,10 +112,10 @@ describe('Site API:', function() {
 
     beforeEach(function(done) {
       request(app)
-        .put('/api/sites/' + newSite._id)
+        .put(`/api/sites/${newSite._id}`)
         .send({
-            name: {en: 'Updated Site'},
-            notes: 'This is the updated site!!!'
+          name: {en: 'Updated Site'},
+          notes: 'This is the updated site!!!'
         })
         .expect(200)
         .expect('Content-Type', /json/)
@@ -142,12 +139,11 @@ describe('Site API:', function() {
   });
 
   describe('DELETE /api/sites/:id', function() {
-
     it('should respond with 204 on successful removal', function(done) {
       request(app)
-        .delete('/api/sites/' + newSite._id)
+        .delete(`/api/sites/${newSite._id}`)
         .expect(204)
-        .end(function(err, res) {
+        .end(function(err) {
           if (err) {
             return done(err);
           }
@@ -157,9 +153,9 @@ describe('Site API:', function() {
 
     it('should respond with 404 when site does not exist', function(done) {
       request(app)
-        .delete('/api/sites/' + newSite._id)
+        .delete(`/api/sites/${newSite._id}`)
         .expect(404)
-        .end(function(err, res) {
+        .end(function(err) {
           if (err) {
             return done(err);
           }

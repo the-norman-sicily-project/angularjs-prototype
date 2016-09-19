@@ -1,6 +1,12 @@
 'use strict';
 
+class PeopleController {
+  constructor() {
+    this.message = 'Hello';
+  }
+}
+
 angular.module('siciliaNormannaApp')
-  .controller('PeopleController', function ($scope) {
-    $scope.message = 'Hello';
-  });
+  .controller('PeopleController', [function() {
+    return new PeopleController();
+  }]);

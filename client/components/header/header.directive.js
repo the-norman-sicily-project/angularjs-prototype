@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('siciliaNormannaApp')
-  .directive('header', function () {
+  .directive('header', function() {
     return {
       templateUrl: 'components/header/header.html',
       restrict: 'E',

@@ -10,17 +10,18 @@ mongoose.Promise = require('bluebird');
 import config from './config/environment';
 import http from 'http';
 import expressConfig from './config/express';
-import routes from './routes'
+import routes from './routes';
 
 // Connect to MongoDB
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {
-  console.error('MongoDB connection error: ' + err);
-  process.exit(-1);
+  throw new Error(`MongoDB connection error: ${err}`);
 });
 
 // Populate databases with sample data
-if (config.seedDB) { require('./config/seed'); }
+if (config.seedDB) {
+  require('./config/seed');
+}
 
 // Setup server
 var app = express();
