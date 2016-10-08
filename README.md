@@ -31,6 +31,10 @@ open the client in your browser when ready.
 
 Run `grunt build` for building and `grunt serve` for preview.
 
+## Deployment
+
+Run `grunt` and `grunt buildcontrol:heroku`
+
 ## Testing
 
 Run `grunt test` to run client and server tests. Run `grunt test:e2e` to run end
