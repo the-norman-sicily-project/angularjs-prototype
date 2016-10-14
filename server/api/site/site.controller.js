@@ -15,7 +15,7 @@ var Site = require('./site.model');
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
-    res.status(statusCode).send(err);
+    return res.status(statusCode).send(err);
   };
 }
 
@@ -23,7 +23,7 @@ function responseWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
     if (entity) {
-      res.status(statusCode).json(entity);
+      return res.status(statusCode).json(entity);
     }
   };
 }
@@ -67,14 +67,14 @@ function removeEntity(res) {
 
 // Gets a list of Sites
 exports.index = function(req, res) {
-  Site.find()
+  return Site.find()
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
 // Gets a single Site from the DB
 exports.show = function(req, res) {
-  Site.findById(req.params.id)
+  return Site.findById(req.params.id)
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -82,7 +82,7 @@ exports.show = function(req, res) {
 
 // Creates a new Site in the DB
 exports.create = function(req, res) {
-  Site.create(req.body)
+  return Site.create(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
@@ -92,7 +92,7 @@ exports.update = function(req, res) {
   if (req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  Site.findById(req.params.id)
+  return Site.findById(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(responseWithResult(res))
@@ -101,7 +101,7 @@ exports.update = function(req, res) {
 
 // Deletes a Site from the DB
 exports.destroy = function(req, res) {
-  Site.findById(req.params.id)
+  return Site.findById(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
