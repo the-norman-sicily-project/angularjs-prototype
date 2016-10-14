@@ -40,11 +40,13 @@ function handleEntityNotFound(res) {
 
 function saveUpdates(updates) {
   return function(entity) {
-    var updated = _.merge(entity, updates);
-    return updated.saveAsync()
-      .spread(function(update) {
-        console.log(update);
-        return update;
+    var updated = _.extend(entity, updates);
+    return updated.save()
+      .then(function(err, updatedItem) {
+        if (err) {
+          return err;
+        }
+        return updatedItem;
       })
       .catch(function(err) {
         console.log(err);
@@ -55,7 +57,7 @@ function saveUpdates(updates) {
 function removeEntity(res) {
   return function(entity) {
     if (entity) {
-      return entity.removeAsync()
+      return entity.remove()
         .then(function() {
           res.status(204).end();
         });
@@ -65,14 +67,14 @@ function removeEntity(res) {
 
 // Gets a list of Sites
 exports.index = function(req, res) {
-  Site.findAsync()
+  Site.find()
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
 // Gets a single Site from the DB
 exports.show = function(req, res) {
-  Site.findByIdAsync(req.params.id)
+  Site.findById(req.params.id)
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -80,7 +82,7 @@ exports.show = function(req, res) {
 
 // Creates a new Site in the DB
 exports.create = function(req, res) {
-  Site.createAsync(req.body)
+  Site.create(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
@@ -90,7 +92,7 @@ exports.update = function(req, res) {
   if (req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  Site.findByIdAsync(req.params.id)
+  Site.findById(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(responseWithResult(res))
@@ -99,7 +101,7 @@ exports.update = function(req, res) {
 
 // Deletes a Site from the DB
 exports.destroy = function(req, res) {
-  Site.findByIdAsync(req.params.id)
+  Site.findById(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

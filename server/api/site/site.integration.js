@@ -2,10 +2,54 @@
 
 var app = require('../..');
 var request = require('supertest');
-
-var newSite;
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId;
 
 describe('Site API:', function() {
+  var testSite;
+
+  beforeEach(function(done) {
+    var site = {
+      name: {
+        en: 'New Site Zero',
+        it: 'Nuovo Sito Zero',
+        variations: ['zero variant'],
+      },
+      location: {
+        approximate: 'Cefalu',
+        elevation: null,
+        isExact: false,
+        latitude: 45.95,
+        longitude: 12.33,
+        modernProvince: 'Palermo'
+      },
+      bibliography: 'Book on Sicily',
+      notes: 'A note about Cefalu',
+      extantRemains: true,
+      primarySourceQuotation: 'a quote about Cefalu',
+      type: 'a type about Cefalu',
+      datesVisited: ['10-12-2016'],
+      details: []
+    };
+
+    request(app)
+      .post('/api/sites')
+      .send(site)
+      .expect(201)
+      .expect('Content-Type', /json/)
+      .end(function(err, res) {
+        if (err) {
+          return done(err);
+        }
+        testSite = res.body;
+        done();
+      });
+  });
+
+  afterEach(function() {
+    testSite = {};
+  });
+
   describe('GET /api/sites', function() {
     var sites;
 
@@ -29,6 +73,8 @@ describe('Site API:', function() {
   });
 
   describe('POST /api/sites', function() {
+    var newSite;
+
     beforeEach(function(done) {
       var site = {
         name: {
@@ -67,6 +113,10 @@ describe('Site API:', function() {
         });
     });
 
+    afterEach(function() {
+      newSite = {};
+    });
+
     it('should respond with the newly created site', function() {
       expect(newSite.datesVisited).to.be.instanceOf(Array);
       expect(newSite.datesVisited[0]).to.equal('10-09-2014');
@@ -85,7 +135,7 @@ describe('Site API:', function() {
 
     beforeEach(function(done) {
       request(app)
-        .get(`/api/sites/${newSite._id}`)
+        .get(`/api/sites/${testSite._id}`)
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
@@ -102,8 +152,8 @@ describe('Site API:', function() {
     });
 
     it('should respond with the requested site', function() {
-      expect(site.name.en).to.equal('New Site One');
-      expect(site.notes).to.equal('This is the swanky site!!!');
+      expect(site.name.en).to.equal('New Site Zero');
+      expect(site.notes).to.equal('A note about Cefalu');
     });
   });
 
@@ -112,7 +162,7 @@ describe('Site API:', function() {
 
     beforeEach(function(done) {
       request(app)
-        .put(`/api/sites/${newSite._id}`)
+        .put(`/api/sites/${testSite._id}`)
         .send({
           name: {en: 'Updated Site'},
           notes: 'This is the updated site!!!'
@@ -132,7 +182,7 @@ describe('Site API:', function() {
       updatedSite = {};
     });
 
-    xit('should respond with the updated site', function() {
+    it('should respond with the updated site', function() {
       expect(updatedSite.name.en).to.equal('Updated Site');
       expect(updatedSite.notes).to.equal('This is the updated site!!!');
     });
@@ -141,7 +191,7 @@ describe('Site API:', function() {
   describe('DELETE /api/sites/:id', function() {
     it('should respond with 204 on successful removal', function(done) {
       request(app)
-        .delete(`/api/sites/${newSite._id}`)
+        .delete(`/api/sites/${testSite._id}`)
         .expect(204)
         .end(function(err) {
           if (err) {
@@ -153,7 +203,7 @@ describe('Site API:', function() {
 
     it('should respond with 404 when site does not exist', function(done) {
       request(app)
-        .delete(`/api/sites/${newSite._id}`)
+        .delete(`/api/sites/${new ObjectId()}`)
         .expect(404)
         .end(function(err) {
           if (err) {
