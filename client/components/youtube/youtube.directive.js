@@ -13,7 +13,7 @@ class YouTubeDirective {
         }
       });
     };
-  };
+  }
 }
 
 angular.module('siciliaNormannaApp')
