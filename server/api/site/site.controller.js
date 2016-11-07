@@ -28,6 +28,16 @@ function responseWithResult(res, statusCode) {
   };
 }
 
+function responseWithResult2(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function(entity) {
+    if (entity) {
+      entity.slides = entity.getSlides(res.app.get('cloudinary.resources'));
+      return res.status(statusCode).json(entity);
+    }
+  };
+}
+
 function handleEntityNotFound(res) {
   return function(entity) {
     if (!entity) {
@@ -76,7 +86,7 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   return Site.findById(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(responseWithResult(res))
+    .then(responseWithResult2(res))
     .catch(handleError(res));
 };
 

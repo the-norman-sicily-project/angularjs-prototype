@@ -11,6 +11,7 @@ import config from './config/environment';
 import http from 'http';
 import expressConfig from './config/express';
 import routes from './routes';
+import cloudinary from 'cloudinary';
 
 // Connect to MongoDB
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -28,6 +29,19 @@ var app = express();
 var server = http.createServer(app);
 expressConfig(app);
 routes(app);
+
+cloudinary.v2.api.resources(
+  { },
+  function(error, result) {
+    if (error) {
+      console.log(error);
+    } else {
+      if (result.resources) {
+        app.set('cloudinary.resources', result.resources);
+      }
+    }
+  },
+);
 
 // Start server
 function startServer() {
