@@ -32,7 +32,8 @@ function responseWithResult2(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
     if (entity) {
-      entity.slides = entity.getSlides(res.app.get('cloudinary.resources'));
+      entity._doc.slides = entity.getSlides(res.app.get('cloudinary.images'));
+      entity._doc.videos = entity.getVideos(res.app.get('cloudinary.videos'));
       return res.status(statusCode).json(entity);
     }
   };

@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
@@ -34,24 +35,19 @@ var SiteSchema = new Schema({
 SiteSchema.methods.getSlides = function getSlides(resources) {
   var id = `${this._doc.media_id.toString()}/`;
   var pattern = new RegExp('^' + id);
-  return _.filter(resources, function(r) { return pattern.test(r.public_id); } );
+  var slides = _.filter(resources, function(r) { return pattern.test(r.public_id); } );
+  return slides;
 };
 
-SiteSchema.methods.getVideos = function getVideos() {
-  return [];
+SiteSchema.methods.getVideos = function getVideos(resources) {
+  var id = `${this._doc.media_id.toString()}/`;
+  var pattern = new RegExp('^' + id);
+  var videos = _.filter(resources, function(r) { return pattern.test(r.public_id); } );
+  return videos;
 };
 
 SiteSchema.methods.getDocuments = function getDocuments() {
   return [];
-};
-
-SiteSchema.methods.hasPhotos = function() {
-  return this.getSlides(function(error, result) {
-    if (error) {
-      console.log(error);
-    }
-    console.log(result);
-  });
 };
 
 SiteSchema

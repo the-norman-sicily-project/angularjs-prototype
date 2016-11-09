@@ -31,13 +31,26 @@ expressConfig(app);
 routes(app);
 
 cloudinary.v2.api.resources(
-  { },
+  { resource_type: 'image' },
   function(error, result) {
     if (error) {
       console.log(error);
     } else {
       if (result.resources) {
-        app.set('cloudinary.resources', result.resources);
+        app.set('cloudinary.images', result.resources);
+      }
+    }
+  },
+);
+
+cloudinary.v2.api.resources(
+  { resource_type: 'video' },
+  function(error, result) {
+    if (error) {
+      console.log(error);
+    } else {
+      if (result.resources) {
+        app.set('cloudinary.videos', result.resources);
       }
     }
   },
