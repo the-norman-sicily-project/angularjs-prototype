@@ -30,31 +30,78 @@ var server = http.createServer(app);
 expressConfig(app);
 routes(app);
 
-cloudinary.v2.api.resources(
-  { resource_type: 'image' },
-  function(error, result) {
-    if (error) {
-      console.log(error);
-    } else {
-      if (result.resources) {
-        app.set('cloudinary.images', result.resources);
-      }
-    }
-  },
-);
+function deleteDerived(nextCursor) {
+  try {
+    var config = {
+      // IMPORTANT : If you don't use this, then ALL photos will be deleted
+      keep_original: true
+    };
 
-cloudinary.v2.api.resources(
-  { resource_type: 'video' },
-  function(error, result) {
+    if(nextCursor) config.next_cursor = nextCursor;
+
+    // This will delete all derived resources up to the cursor limit of 2000
+    cloudinary.api.delete_all_resources(function(result) {
+
+      // Just some logging to show what got deleted
+      console.log("\n\n");
+      console.log( new Date());
+      console.log(result);
+
+      // Wait 5 seconds to prevent exceeding your API limit
+      if(result && result.next_cursor) {
+        setTimeout(function() {
+          deleteDerived(result.next_cursor);
+        });
+      }
+    }, config ); // Be sure to pass in the config or say Bye Bye to all your photos
+  } catch(e) {
+    console.log("Failed!!!");
+    console.log(e);
+    console.log(e.message);
+  }
+}
+
+setTimeout(function() { deleteDerived(); });
+
+function getCloudinaryResources(resourceType, resourceCollection, nextCursor) {
+  var config = {
+    resource_type: resourceType,
+    max_results: 500
+  }
+
+  if (nextCursor) {
+    config.next_cursor = nextCursor;
+  }
+
+  cloudinary.v2.api.resources(config, function(error, result) {
     if (error) {
       console.log(error);
     } else {
       if (result.resources) {
-        app.set('cloudinary.videos', result.resources);
+        resourceCollection = resourceCollection.concat(result.resources);
+      }
+
+      if (result.next_cursor) {
+        setTimeout(function() {
+          getImages(resourceType, resourceCollection, result.next_cursor);
+        });
+      } else {
+        app.set(`cloudinary.${resourceType}`, resourceCollection);
       }
     }
-  },
-);
+  });
+}
+
+var cloudinaryImages = [];
+var cloudinaryVideos = [];
+
+setTimeout(function() {
+  getCloudinaryResources('image', cloudinaryImages);
+});
+
+setTimeout(function() {
+  getCloudinaryResources('video', cloudinaryVideos);
+});
 
 // Start server
 function startServer() {
