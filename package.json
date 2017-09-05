@@ -123,5 +123,9 @@
   },
   "private": true,
   "license": "MIT",
-  "author": "Joseph Hayes <joephayes@gmail.com>"
+  "author": "Joseph Hayes <joephayes@gmail.com>",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/the-norman-sicily-project/site-prototype"
+  }
 }
