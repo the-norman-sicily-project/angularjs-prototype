@@ -121,5 +121,7 @@
     "lint-server-specs": "./node_modules/.bin/eslint -c ./server/.eslintrc-spec './server/**/*.{spec,integration}.js'; exit 0;",
     "lint": "npm run lint-client && npm run lint-client-specs && npm run lint-server && npm run lint-server-specs"
   },
-  "private": true
+  "private": true,
+  "license": "MIT",
+  "author": "Joseph Hayes <joephayes@gmail.com>"
 }
