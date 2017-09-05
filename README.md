@@ -53,3 +53,10 @@ directory:
 cd node_modules/grunt-protractor-runner/
 npm install
 ```
+
+## License
+
+Copyright © 2015-2017 Joseph P. Hayes
+
+Released under the MIT license.
+
