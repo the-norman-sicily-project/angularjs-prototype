@@ -1,4 +1,8 @@
+# NOTICE: THIS SITE IS DEPRECATED
+
 # sicilia-normanna
+
+This project was demonstrated at the [2016 Medieval Academy of America Annual Meeting](https://maa2016annualmeeting.sched.com/event/4lHZ/digital-humanities-iv-interactive)
 
 This project was generated with the
 [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack)
